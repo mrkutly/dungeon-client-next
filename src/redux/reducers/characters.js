@@ -14,7 +14,6 @@ export default function reducer(state = initialState.characters, action) {
 			return {
 				...state,
 				loading: false,
-				checkedLocal: true,
 				error: null,
 				data: action.payload,
 			};
@@ -27,11 +26,32 @@ export default function reducer(state = initialState.characters, action) {
 				error: action.payload,
 			};
 
-		case Actions.LOCAL_CHARACTER_LOAD_FAILED:
+		case Actions.CHARACTER_DETAILS_LOAD_STARTED:
 			return {
 				...state,
-				checkedLocal: true,
+				loading: true,
 			};
+
+		case Actions.CHARACTER_DETAILS_LOAD_SUCCESS: {
+			const characters = [...state.data];
+			const characterIndex = characters.findIndex((c) => c.id === action.payload.id);
+			action.payload.detailsLoaded = true;
+			characters[characterIndex] = action.payload;
+
+			return {
+				...state,
+				activeId: action.payload.id,
+				loading: false,
+				data: characters,
+			};
+		}
+
+		case Actions.SELECT_CHARACTER: {
+			return {
+				...state,
+				activeId: action.payload,
+			};
+		}
 
 		default:
 			return state;

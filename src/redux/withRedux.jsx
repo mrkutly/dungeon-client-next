@@ -43,18 +43,18 @@ const withRedux = (PageComponent, { ssr = true } = {}) => {
 		WithRedux.displayName = `withRedux(${displayName})`;
 	}
 
-	if (ssr || PageComponent.getInitialProps) {
-		WithRedux.getInitialProps = async (context) => {
+	if (ssr || PageComponent.getServerSideProps) {
+		WithRedux.getServerSideProps = async (context) => {
 			// Get or Create the store with `undefined` as initialState
 			// This allows you to set a custom default initialState
 			const store = getOrInitializeStore();
 
-			// Provide the store to getInitialProps of pages
+			// Provide the store to getServerSideProps of pages
 			context.reduxStore = store;
 
-			// Run getInitialProps from HOCed PageComponent
-			const pageProps = typeof PageComponent.getInitialProps === 'function'
-				? await PageComponent.getInitialProps(context)
+			// Run getServerSideProps from HOCed PageComponent
+			const pageProps = typeof PageComponent.getServerSideProps === 'function'
+				? await PageComponent.getServerSideProps(context)
 				: {};
 
 			// Pass props to PageComponent

@@ -2,7 +2,7 @@ import * as Actions from '../actionTypes';
 import { get } from '../../lib/fetches';
 
 /**
- * CHARACTER ACTIONS
+ * CHARACTERS ACTIONS
  */
 
 export const characterLoadStarted = () => ({
@@ -14,13 +14,9 @@ export const characterLoadError = (error) => ({
 	payload: error.message,
 });
 
-export const characterLoadSuccess = (token) => ({
+export const characterLoadSuccess = (characters) => ({
 	type: Actions.CHARACTER_LOAD_SUCCESS,
-	payload: token,
-});
-
-export const localCharacterLoadFailed = () => ({
-	type: Actions.LOCAL_CHARACTER_LOAD_FAILED,
+	payload: characters,
 });
 
 export const loadCharacters = (token) => async (dispatch) => {
@@ -29,7 +25,42 @@ export const loadCharacters = (token) => async (dispatch) => {
 		const result = await get('/characters', token);
 		if (result.error) throw new Error(result.error);
 		dispatch(characterLoadSuccess(result.characters));
-		localStorage.setItem('characters', JSON.stringify(result.characters));
+	} catch (error) {
+		dispatch(characterLoadError(error));
+	}
+};
+
+/**
+ * ACTIVE CHARACTER ACTIONS
+ */
+
+export const characterDetailsLoadStarted = () => ({
+	type: Actions.CHARACTER_DETAILS_LOAD_STARTED,
+});
+
+export const characterDetailsLoadSuccess = (character) => ({
+	type: Actions.CHARACTER_DETAILS_LOAD_SUCCESS,
+	payload: character,
+});
+
+
+export const selectCharacter = (id) => ({
+	type: Actions.SELECT_CHARACTER,
+	payload: id,
+});
+
+export const getCharacterDetails = (character, token) => async (dispatch) => {
+	if (character.detailsLoaded) {
+		dispatch(selectCharacter(character.id));
+		return;
+	}
+	try {
+		dispatch(characterDetailsLoadStarted(character.id));
+		const response = await get(`/characters/${character.id}`, token);
+		if (response.error) {
+			throw new Error(response.error);
+		}
+		dispatch(characterDetailsLoadSuccess(response.character));
 	} catch (error) {
 		dispatch(characterLoadError(error));
 	}

@@ -20,6 +20,14 @@ h1 {
 	font-size: 3rem;
 }
 
+h2 {
+	font-size: 2.5rem;
+}
+
+h3 {
+	font-size: 2rem;
+}
+
 h1, h2, h3 {
 	font-family: 'Poiret One', serif;
 	margin: calc(2 * var(--one-space)) 0;
@@ -44,8 +52,15 @@ label {
 }
 
 a {
+	cursor: pointer;
 	color: var(--primary);
 	text-decoration: none;
 	padding: calc (var(--one-space) / 2) 0;
 	border-bottom: var(--one-width) solid var(--highlight-2);
+	transition: all 0.3s ease;
+}
+
+a:hover {
+	letter-spacing: 0.5px;
+	border-bottom-color: var(--highlight);
 }

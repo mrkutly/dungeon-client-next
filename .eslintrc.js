@@ -15,5 +15,8 @@ module.exports = {
 		'no-param-reassign': 0,
 		'jsx-a11y/anchor-is-valid': 0,
 		'consistent-return': 0,
+		'camelcase': 0,
+		'prefer-const': 0,
+		'react/jsx-indent-props': ['error', 'tab']
 	}
 }

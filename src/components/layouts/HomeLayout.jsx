@@ -8,7 +8,6 @@ const HomeLayout = ({ children }) => (
 
 const HomeStyles = styled.main`
 	max-width: 1000px;
-	padding: 0 calc(var(--one-space) * 4);
 	margin: auto;
 `;
 
