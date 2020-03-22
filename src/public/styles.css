@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Poiret+One&display=swap');
+
+:root {
+	--one-space: 12px;
+	--one-width: 4px;
+	--primary: #000000;
+	--accent: #229989;
+	--highlight: #92ffaaf8;
+	--highlight-2: #9fbdfff8;
+	font-size: 16px;
+}
+
+body {
+	margin: 0;
+	font-family: 'Open Sans', Helvetica, sans-serif;
+	color: var(--primary);
+}
+
+h1 {
+	font-size: 3rem;
+}
+
+h1, h2, h3 {
+	font-family: 'Poiret One', serif;
+	margin: calc(2 * var(--one-space)) 0;
+}
+
+button, input[type="submit"] {
+	font-size: 1rem;
+	background: transparent;
+	margin: var(--one-space) 0;
+	border: var(--one-width) solid var(--highlight);
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+	width: calc(var(--one-space) * 20);
+	font-size: 1.2rem;
+	margin-left: var(--one-space);
+}
+
+label {
+	display: block;
+	margin: var(--one-space) 0;
+}
+
+a {
+	color: var(--primary);
+	text-decoration: none;
+	padding: calc (var(--one-space) / 2) 0;
+	border-bottom: var(--one-width) solid var(--highlight-2);
+}

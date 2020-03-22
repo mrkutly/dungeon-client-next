@@ -1,15 +1,30 @@
 {
-  "name": "dungeon-client-next",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
-  },
-  "dependencies": {
-    "next": "9.3.1",
-    "react": "16.13.1",
-    "react-dom": "16.13.1"
-  }
+	"name": "dungeon-client-next",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev -p 7777",
+		"build": "next build",
+		"start": "next start"
+	},
+	"dependencies": {
+		"next": "9.3.1",
+		"prop-types": "^15.7.2",
+		"react": "16.13.1",
+		"react-dom": "16.13.1",
+		"react-redux": "^7.2.0",
+		"redux": "^4.0.5",
+		"redux-devtools-extension": "^2.13.8",
+		"redux-thunk": "^2.3.0",
+		"styled-components": "^5.0.1"
+	},
+	"devDependencies": {
+		"babel-plugin-styled-components": "^1.10.7",
+		"eslint": "^5.16.0 || ^6.8.0",
+		"eslint-config-airbnb": "^18.1.0",
+		"eslint-plugin-import": "^2.20.1",
+		"eslint-plugin-jsx-a11y": "^6.2.3",
+		"eslint-plugin-react": "^7.19.0",
+		"eslint-plugin-react-hooks": "^2.5.0 || ^1.7.0"
+	}
 }
