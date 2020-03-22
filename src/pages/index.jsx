@@ -1,4 +1,4 @@
 import withRedux from '../redux/withRedux';
-import Home from '../components/Home';
+import Home from '../components/SiteHome';
 
 export default withRedux(Home);

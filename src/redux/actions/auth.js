@@ -1,4 +1,5 @@
-import * as Actions from './actionTypes';
+import Router from 'next/router';
+import * as Actions from '../actionTypes';
 import { post } from '../../lib/fetches';
 
 /**
@@ -19,6 +20,10 @@ export const signinSuccess = (token) => ({
 	payload: token,
 });
 
+export const localSignInFailed = () => ({
+	type: Actions.LOCAL_SIGNIN_FAILED,
+});
+
 export const signin = (email, password) => async (dispatch) => {
 	try {
 		dispatch(signinStarted());
@@ -26,6 +31,7 @@ export const signin = (email, password) => async (dispatch) => {
 		if (result.error) throw new Error(result.error);
 		dispatch(signinSuccess(result.token));
 		localStorage.setItem('authToken', result.token);
+		Router.push('/home');
 	} catch (error) {
 		dispatch(signinError(error));
 	}
@@ -38,6 +44,7 @@ export const signup = (email, password) => async (dispatch) => {
 		if (result.error) throw new Error(result.error);
 		dispatch(signinSuccess(result.token));
 		localStorage.setItem('authToken', result.token);
+		Router.push('/home');
 	} catch (error) {
 		dispatch(signinError(error));
 	}

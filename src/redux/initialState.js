@@ -3,5 +3,12 @@ export default {
 		token: null,
 		loading: false,
 		error: null,
+		checkedLocal: false,
+	},
+	characters: {
+		loading: false,
+		data: null,
+		error: null,
+		checkedLocal: false,
 	},
 };

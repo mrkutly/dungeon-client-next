@@ -1,15 +1,13 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { signup } from '../redux/actions';
+import { signup } from '../redux/actions/auth';
 import Centered from './layouts/Centered';
 
 const SignIn = () => {
 	const dispatch = useDispatch();
-	const router = useRouter();
 	const [clientError, setClientError] = useState(null);
-	const { loading, token, error } = useSelector(({ auth }) => auth);
+	const { loading, error } = useSelector(({ auth }) => auth);
 	const [formData, setFormData] = useState({
 		email: '',
 		password: '',
@@ -31,18 +29,10 @@ const SignIn = () => {
 		dispatch(signup(email, password));
 	};
 
-
-	useEffect(() => {
-		if (token) {
-			router.push('/home');
-		}
-	}, [token]);
-
-
 	return (
 		<Centered>
 			<h1>Sign up</h1>
-			<form method="POST" onSubmit={handleSubmit}>
+			<form method="POST" onSubmit={handleSubmit} aria-busy={loading} disabled={loading}>
 				<label htmlFor="email">
 					Email
 					<input type="email" name="email" onChange={handleChange} value={email} />
@@ -60,7 +50,7 @@ const SignIn = () => {
 			<Link href="/">
 				<a>Go Back</a>
 			</Link>
-			<h2 style={{ minHeight: '2rem' }}>
+			<h2>
 				{loading && 'loading...'}
 				{clientError && `${clientError}`}
 				{error && `${error}`}

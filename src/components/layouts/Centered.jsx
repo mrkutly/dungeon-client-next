@@ -8,6 +8,7 @@ const CenteredStyles = styled.main`
 	display: grid;
 
 	div {
+		min-height: 50vh;
 		margin: auto;
 	}
 `;

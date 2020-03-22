@@ -1,25 +1,12 @@
-import { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { signinSuccess } from '../redux/actions';
+import { useSelector } from 'react-redux';
+import useLocalToken from '../hooks/useLocalToken';
 import SignIn from './SignIn';
-import Centered from './layouts/Centered';
 
 const PleaseSignIn = ({ children }) => {
-	const [checked, setChecked] = useState(false);
-	const token = useSelector(({ auth }) => auth.token);
-	const dispatch = useDispatch();
+	const { token, checkedLocal } = useSelector((s) => s.auth);
+	useLocalToken();
 
-	useEffect(() => {
-		if (!token) {
-			const foundToken = localStorage.getItem('authToken');
-			if (foundToken) {
-				dispatch(signinSuccess(foundToken));
-			}
-		}
-		setChecked(true);
-	}, []);
-
-	if (!checked) return <Centered><h1>loading...</h1></Centered>;
+	if (!checkedLocal) return null;
 	if (!token) return <SignIn />;
 	return <>{children}</>;
 };

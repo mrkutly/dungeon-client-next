@@ -1,20 +1,19 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { signin } from '../redux/actions';
+import { signin } from '../redux/actions/auth';
 import Centered from './layouts/Centered';
-
 
 const SignIn = () => {
 	const dispatch = useDispatch();
-	const router = useRouter();
-	const { loading, token, error } = useSelector(({ auth }) => auth);
+	const { loading, error } = useSelector(({ auth }) => auth);
 	const [formData, setFormData] = useState({
 		email: '',
 		password: '',
 	});
 	const { email, password } = formData;
+
+
 	const handleChange = ({ target }) => {
 		setFormData({
 			...formData,
@@ -24,19 +23,13 @@ const SignIn = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		dispatch(signin(email, password));
+		await dispatch(signin(email, password));
 	};
-
-	useEffect(() => {
-		if (token) {
-			router.push('/home');
-		}
-	}, [token]);
 
 	return (
 		<Centered>
 			<h1>Sign in</h1>
-			<form method="POST" onSubmit={handleSubmit}>
+			<form method="POST" onSubmit={handleSubmit} aria-busy={loading} disabled={loading}>
 				<label htmlFor="email">
 					Email
 					<input type="email" name="email" vale={email} onChange={handleChange} />
@@ -50,8 +43,7 @@ const SignIn = () => {
 			<Link href="/">
 				<a>Go Back</a>
 			</Link>
-			<h2 style={{ minHeight: '2rem' }}>
-				{loading && 'Loading...'}
+			<h2>
 				{error}
 			</h2>
 		</Centered>

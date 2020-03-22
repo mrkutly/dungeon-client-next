@@ -1,33 +1,33 @@
 import initialState from '../initialState';
 import * as Actions from '../actionTypes';
 
-export default function reducer(state = initialState.auth, action) {
+export default function reducer(state = initialState.characters, action) {
 	switch (action.type) {
-		case Actions.SIGNIN_STARTED:
+		case Actions.CHARACTER_LOAD_STARTED:
 			return {
 				...state,
 				loading: true,
 				error: null,
 			};
 
-		case Actions.SIGNIN_SUCCESS:
+		case Actions.CHARACTER_LOAD_SUCCESS:
 			return {
 				...state,
 				loading: false,
 				checkedLocal: true,
 				error: null,
-				token: action.payload,
+				data: action.payload,
 			};
 
-		case Actions.SIGNIN_ERROR:
+		case Actions.CHARACTER_LOAD_ERROR:
 			return {
 				...state,
 				loading: false,
-				token: null,
+				data: null,
 				error: action.payload,
 			};
 
-		case Actions.LOCAL_SIGNIN_FAILED:
+		case Actions.LOCAL_CHARACTER_LOAD_FAILED:
 			return {
 				...state,
 				checkedLocal: true,
