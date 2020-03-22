@@ -29,7 +29,7 @@ const Home = () => {
 					</>
 				)
 				:	null}
-			{checkedLocal && token ? <Link href="/home"><a>Go to my stuff.</a></Link> : null}
+			{checkedLocal && token ? <Link href="/characters"><a>Go to my stuff.</a></Link> : null}
 		</Centered>
 	);
 };

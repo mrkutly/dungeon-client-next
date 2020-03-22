@@ -1,57 +1,37 @@
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
-import { getCharacterDetails } from '../redux/actions/characters';
+import Link from 'next/link';
 
-const CharacterCard = ({ character, token }) => {
-	const dispatch = useDispatch();
+const CharacterCard = ({ character }) => {
 	const {
-		name, level,
+		name, level, id,
 	} = character;
 	const race = character.race.name;
 	const characterClass = character.character_class.name;
-	const handleSelect = () => dispatch(getCharacterDetails(character, token));
-
 
 	return (
-		<CardStyles
-			onClick={handleSelect}
-			onKeyPress={({ key }) => key === 'Enter' && handleSelect()}
-			tabIndex="0"
-			role="button"
-			aria-label={`Select ${name}`}
-		>
-			<h2>
-				{name}
-			</h2>
-			<span>
-				Lvl
-				{' '}
-				{level}
-				{' '}
-				{race}
-				{' '}
-				{characterClass}
-			</span>
-		</CardStyles>
+		<Link href={`/characters/${id}`}>
+			<CardStyles>
+				<h2>
+					{name}
+				</h2>
+				<span>
+					Lvl
+					{' '}
+					{level}
+					{' '}
+					{race}
+					{' '}
+					{characterClass}
+				</span>
+			</CardStyles>
+		</Link>
 	);
 };
 
-const CardStyles = styled.div`
+const CardStyles = styled.a`
 	display: block;
 	margin: calc(var(--one-space) * 5) 0;
-	cursor: pointer;
-	color: var(--primary);
-	text-decoration: none;
-	padding: calc (var(--one-space) / 2) 0;
-	border-bottom: var(--one-width) solid var(--highlight-2);
-	transition: all 0.3s ease;
-
-	&:hover, &:focus {
-		outline: none;
-		letter-spacing: 0.5px;
-		border-bottom-color: var(--highlight);
-	}
-
+	
 	span {
 		margin-left: calc(var(--one-space) * 3)
 	}

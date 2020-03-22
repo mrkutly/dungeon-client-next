@@ -44,16 +44,8 @@ export const characterDetailsLoadSuccess = (character) => ({
 });
 
 
-export const selectCharacter = (id) => ({
-	type: Actions.SELECT_CHARACTER,
-	payload: id,
-});
-
 export const getCharacterDetails = (character, token) => async (dispatch) => {
-	if (character.detailsLoaded) {
-		dispatch(selectCharacter(character.id));
-		return;
-	}
+	if (character.detailsLoaded) return;
 	try {
 		dispatch(characterDetailsLoadStarted(character.id));
 		const response = await get(`/characters/${character.id}`, token);

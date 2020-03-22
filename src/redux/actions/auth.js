@@ -31,7 +31,7 @@ export const signin = (email, password) => async (dispatch) => {
 		if (result.error) throw new Error(result.error);
 		dispatch(signinSuccess(result.token));
 		localStorage.setItem('authToken', result.token);
-		Router.push('/home');
+		Router.push('/characters');
 	} catch (error) {
 		dispatch(signinError(error));
 	}
@@ -44,7 +44,7 @@ export const signup = (email, password) => async (dispatch) => {
 		if (result.error) throw new Error(result.error);
 		dispatch(signinSuccess(result.token));
 		localStorage.setItem('authToken', result.token);
-		Router.push('/home');
+		Router.push('/characters');
 	} catch (error) {
 		dispatch(signinError(error));
 	}

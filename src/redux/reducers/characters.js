@@ -33,23 +33,20 @@ export default function reducer(state = initialState.characters, action) {
 			};
 
 		case Actions.CHARACTER_DETAILS_LOAD_SUCCESS: {
-			const characters = [...state.data];
+			const data = state.data || [];
+			const characters = [...data];
 			const characterIndex = characters.findIndex((c) => c.id === action.payload.id);
 			action.payload.detailsLoaded = true;
-			characters[characterIndex] = action.payload;
+			if (characterIndex >= 0) {
+				characters[characterIndex] = action.payload;
+			} else {
+				characters.push(action.payload);
+			}
 
 			return {
 				...state,
-				activeId: action.payload.id,
 				loading: false,
 				data: characters,
-			};
-		}
-
-		case Actions.SELECT_CHARACTER: {
-			return {
-				...state,
-				activeId: action.payload,
 			};
 		}
 

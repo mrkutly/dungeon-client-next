@@ -1,26 +1,19 @@
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import CharacterCard from './CharacterCard';
-import CharacterSheet from './CharacterSheet';
 
 const Characters = () => {
 	const {
 		error,
-		activeId,
 		data: characters,
 	} = useSelector((s) => s.characters);
-	const { token } = useSelector((s) => s.auth);
 
-	if (!characters) return null;
 	if (error) return <h1>{error}</h1>;
-	if (activeId) {
-		const active = characters.find((c) => c.id === activeId);
-		return <CharacterSheet character={active} />;
-	}
+	if (!characters) return null;
 
 	return (
 		<CharacterListStyles>
-			{characters.map((c) => <li key={c.id}><CharacterCard character={c} token={token} /></li>)}
+			{characters.map((c) => <li key={c.id}><CharacterCard character={c} /></li>)}
 		</CharacterListStyles>
 	);
 };

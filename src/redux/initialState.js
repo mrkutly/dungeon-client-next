@@ -6,7 +6,6 @@ export default {
 		checkedLocal: false,
 	},
 	characters: {
-		activeId: null,
 		loading: false,
 		data: null,
 		error: null,

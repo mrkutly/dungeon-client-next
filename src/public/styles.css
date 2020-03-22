@@ -11,13 +11,13 @@
 }
 
 body {
-	margin: 0;
+	margin: var(--one-space);
 	font-family: 'Open Sans', Helvetica, sans-serif;
 	color: var(--primary);
 }
 
 h1 {
-	font-size: 3rem;
+	font-size: 5rem;
 }
 
 h2 {

@@ -3,8 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { loadCharacters } from '../redux/actions/characters';
 
 const useCharacters = () => {
-	const { data, error, loading } = useSelector((s) => s.characters);
-	const { token } = useSelector((s) => s.auth);
+	const data = useSelector((s) => s.characters.data);
+	const error = useSelector((s) => s.characters.error);
+	const token = useSelector((s) => s.auth.token);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -13,7 +14,7 @@ const useCharacters = () => {
 		}
 	}, []);
 
-	return { data, error, loading };
+	return { data, error };
 };
 
 export default useCharacters;
