@@ -12,8 +12,8 @@ const BasicInfo = ({ character }) => {
 		max_hp, current_hp, experience, languages, conditions,
 	} = character;
 
-	const languageNames = languages && languages.map((l) => l.name);
-	const conditionNames = conditions && conditions.map((c) => c.name);
+	const languageNames = languages && languages.length ? languages.map((l) => l.name) : null;
+	const conditionNames = conditions && conditions.length ? conditions.map((c) => c.name) : null;
 
 	return (
 		<InfoStyles id="hp-and-experience">
@@ -24,7 +24,7 @@ const BasicInfo = ({ character }) => {
 				EXP {experience}
 			</span>
 
-			{languages && (
+			{languageNames && (
 				<div>
 					Speaks {joinIntoSentence(languageNames)}.
 				</div>
