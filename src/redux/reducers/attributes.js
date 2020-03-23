@@ -16,6 +16,7 @@ export default function reducer(state = initialState.attributes, action) {
 				loading: false,
 				error: null,
 				[action.payloadType]: {
+					...state[action.payloadType],
 					[action.id]: action.payload,
 				},
 			};
