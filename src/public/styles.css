@@ -64,3 +64,11 @@ a:hover {
 	letter-spacing: 0.5px;
 	border-bottom-color: var(--highlight);
 }
+
+section#equipment h2, 
+section#skills h2, 
+section#proficiencies h2, 
+section#features h2, 
+section#spells h2 {
+	margin-top: 0;
+}

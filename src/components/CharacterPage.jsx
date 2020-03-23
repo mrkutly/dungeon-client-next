@@ -10,6 +10,7 @@ const CharacterPage = () => {
 
 	return (
 		<HomeLayout>
+			{loading && <h1>loading...</h1>}
 			{error && <h1>{error}</h1>}
 			{character && !loading && <CharacterSheet character={character} />}
 		</HomeLayout>

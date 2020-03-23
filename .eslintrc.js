@@ -17,6 +17,7 @@ module.exports = {
 		'consistent-return': 0,
 		'camelcase': 0,
 		'prefer-const': 0,
-		'react/jsx-indent-props': ['error', 'tab']
+		'react/jsx-indent-props': ['error', 'tab'],
+		'react/jsx-one-expression-per-line': 0,
 	}
 }

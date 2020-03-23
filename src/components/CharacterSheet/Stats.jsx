@@ -11,28 +11,34 @@ const Stats = ({ character }) => {
 	} = character;
 
 	return (
-		<StatsStyles>
+		<StatsStyles id="stats">
 			<div>CON</div>
-			<div>{constitution}</div>
+			<div aria-label="consitution">{constitution}</div>
 			<div>STR</div>
-			<div>{strength}</div>
+			<div aria-label="strength">{strength}</div>
 			<div>DEX</div>
-			<div>{dexterity}</div>
+			<div aria-label="dexterity">{dexterity}</div>
 			<div>WIS</div>
-			<div>{wisdom}</div>
+			<div aria-label="wisdom">{wisdom}</div>
 			<div>INT</div>
-			<div>{intelligence}</div>
+			<div aria-label="intelligence">{intelligence}</div>
 			<div>CHA</div>
-			<div>{charisma}</div>
+			<div aria-label="charisma">{charisma}</div>
 		</StatsStyles>
 	);
 };
 
-const StatsStyles = styled.div`
+const StatsStyles = styled.section`
 	display: grid;
+	grid-row: 1 / span 10;
 	font-size: 1.5rem;
 	grid-template-columns: repeat(2, 4rem);
-	grid-template-rows: repeat(10, 3rem);
+	grid-template-rows: repeat(6, 2.5rem);
+	border-top: var(--one-width) solid var(--highlight);
+	
+	div {
+		border-bottom: var(--one-width) solid var(--highlight);
+	}
 `;
 
 export default Stats;

@@ -17,7 +17,7 @@ export const post = async (endpoint, data) => {
 	return response.json();
 };
 
-export const get = async (endpoint, token) => {
+export const get = async (endpoint, token = '') => {
 	const url = baseUrl + endpoint;
 	const response = await fetch(url, {
 		method: 'GET',
