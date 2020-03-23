@@ -19,14 +19,16 @@ export const characterLoadSuccess = (characters) => ({
 	payload: characters,
 });
 
-export const loadCharacters = (token) => async (dispatch) => {
+export const loadCharacters = (token, controller) => async (dispatch) => {
 	try {
 		dispatch(characterLoadStarted());
-		const result = await get('/characters', token);
+		const result = await get('/characters', token, controller);
 		if (result.error) throw new Error(result.error);
 		dispatch(characterLoadSuccess(result.characters));
 	} catch (error) {
-		dispatch(characterLoadError(error));
+		if (!controller.signal.aborted) {
+			dispatch(characterLoadError(error));
+		}
 	}
 };
 
@@ -44,16 +46,18 @@ export const characterDetailsLoadSuccess = (character) => ({
 });
 
 
-export const getCharacterDetails = (character, token) => async (dispatch) => {
+export const getCharacterDetails = (character, token, controller) => async (dispatch) => {
 	if (character.detailsLoaded) return;
 	try {
 		dispatch(characterDetailsLoadStarted(character.id));
-		const response = await get(`/characters/${character.id}`, token);
+		const response = await get(`/characters/${character.id}`, token, controller);
 		if (response.error) {
 			throw new Error(response.error);
 		}
 		dispatch(characterDetailsLoadSuccess(response.character));
 	} catch (error) {
-		dispatch(characterLoadError(error));
+		if (!controller.signal.aborted) {
+			dispatch(characterLoadError(error));
+		}
 	}
 };

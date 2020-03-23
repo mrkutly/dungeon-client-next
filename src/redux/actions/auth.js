@@ -24,28 +24,32 @@ export const localSignInFailed = () => ({
 	type: Actions.LOCAL_SIGNIN_FAILED,
 });
 
-export const signin = (email, password) => async (dispatch) => {
+export const signin = (email, password, controller) => async (dispatch) => {
 	try {
 		dispatch(signinStarted());
-		const result = await post('/login', { email, password });
+		const result = await post('/login', { email, password }, controller);
 		if (result.error) throw new Error(result.error);
 		dispatch(signinSuccess(result.token));
 		localStorage.setItem('authToken', result.token);
 		Router.push('/characters');
 	} catch (error) {
-		dispatch(signinError(error));
+		if (!controller.signal.aborted) {
+			dispatch(signinError(error));
+		}
 	}
 };
 
-export const signup = (email, password) => async (dispatch) => {
+export const signup = (email, password, controller) => async (dispatch) => {
 	try {
 		dispatch(signinStarted());
-		const result = await post('/signup', { email, password });
+		const result = await post('/signup', { email, password }, controller);
 		if (result.error) throw new Error(result.error);
 		dispatch(signinSuccess(result.token));
 		localStorage.setItem('authToken', result.token);
 		Router.push('/characters');
 	} catch (error) {
-		dispatch(signinError(error));
+		if (!controller.signal.aborted) {
+			dispatch(signinError(error));
+		}
 	}
 };

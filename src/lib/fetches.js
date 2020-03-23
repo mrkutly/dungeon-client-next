@@ -7,17 +7,18 @@ const headers = {
 	'Content-Type': 'application/json',
 };
 
-export const post = async (endpoint, data) => {
+export const post = async (endpoint, data, controller = new AbortController()) => {
 	const url = baseUrl + endpoint;
 	const response = await fetch(url, {
 		method: 'POST',
 		headers,
 		body: JSON.stringify(data),
+		signal: controller.signal,
 	});
 	return response.json();
 };
 
-export const get = async (endpoint, token = '') => {
+export const get = async (endpoint, token = '', controller = new AbortController()) => {
 	const url = baseUrl + endpoint;
 	const response = await fetch(url, {
 		method: 'GET',
@@ -25,6 +26,7 @@ export const get = async (endpoint, token = '') => {
 			...headers,
 			authorization: token,
 		},
+		signal: controller.signal,
 	});
 	return response.json();
 };

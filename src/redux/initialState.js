@@ -10,4 +10,13 @@ export default {
 		data: null,
 		error: null,
 	},
+	attributes: {
+		loading: false,
+		error: null,
+		features: {},
+		skills: {},
+		proficiencies: {},
+		spells: {},
+		equipment: {},
+	},
 };
