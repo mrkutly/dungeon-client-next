@@ -1,11 +1,5 @@
 import styled from 'styled-components';
-
-const joinIntoSentence = (arr) => {
-	if (arr.length === 1) return arr[0];
-	const last = arr.pop();
-	let joined = arr.join(', ');
-	return `${joined}, and ${last}`;
-};
+import joinIntoSentence from '../../lib/joinIntoSentence';
 
 const BasicInfo = ({ character }) => {
 	const {

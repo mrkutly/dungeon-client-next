@@ -9,7 +9,7 @@ import {
 	SKILLS,
 	SPELLS,
 	EQUIPMENT,
-} from './attributeTypes';
+} from '../../redux/attributeTypes';
 
 const CharacterSheet = ({ character }) => (
 	<>

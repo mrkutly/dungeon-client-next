@@ -1,13 +1,16 @@
 import styled from 'styled-components';
 import useAttribute from '../../hooks/useAttribute';
 import Feature from './attribute-details/Feature';
+import Proficiency from './attribute-details/Proficiency';
+import Skill from './attribute-details/Skill';
+import Spell from './attribute-details/Spell';
 import {
 	FEATURES,
 	PROFICIENCIES,
 	SKILLS,
 	SPELLS,
-	EQUIPMENT,
-} from './attributeTypes';
+	// EQUIPMENT,
+} from '../../redux/attributeTypes';
 
 const Modal = ({
 	type, id, outerRef, closeBtnRef,
@@ -22,6 +25,9 @@ const Modal = ({
 					{loading && <h1>loading...</h1>}
 					{error && <h3>{error}</h3>}
 					{data && type === FEATURES && <Feature data={data} />}
+					{data && type === PROFICIENCIES && <Proficiency data={data} />}
+					{data && type === SKILLS && <Skill data={data} />}
+					{data && type === SPELLS && <Spell data={data} />}
 				</div>
 			</div>
 		</ModalStyles>
@@ -53,6 +59,7 @@ const ModalStyles = styled.div`
 		background-color: white;
 		max-width: 90vw;
 		max-height: 90vh;
+		min-width: 60vw;
 		overflow: scroll;
 		border: var(--one-width) solid var(--highlight);
 	}
