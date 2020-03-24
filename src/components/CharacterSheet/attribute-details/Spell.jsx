@@ -22,7 +22,9 @@ const Spell = ({ data }) => {
 		if (c === 'V') return 'Verbal';
 		if (c === 'M') return 'Material';
 		if (c === 'S') return 'Somatic';
+		return null;
 	});
+
 	return (
 		<>
 			<h2>{name}</h2>

@@ -4,12 +4,13 @@ import Feature from './attribute-details/Feature';
 import Proficiency from './attribute-details/Proficiency';
 import Skill from './attribute-details/Skill';
 import Spell from './attribute-details/Spell';
+import Equipment from './attribute-details/Equipment';
 import {
 	FEATURES,
 	PROFICIENCIES,
 	SKILLS,
 	SPELLS,
-	// EQUIPMENT,
+	EQUIPMENT,
 } from '../../redux/attributeTypes';
 
 const Modal = ({
@@ -28,6 +29,7 @@ const Modal = ({
 					{data && type === PROFICIENCIES && <Proficiency data={data} />}
 					{data && type === SKILLS && <Skill data={data} />}
 					{data && type === SPELLS && <Spell data={data} />}
+					{data && type === EQUIPMENT && <Equipment data={data} />}
 				</div>
 			</div>
 		</ModalStyles>
