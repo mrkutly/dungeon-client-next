@@ -1,13 +1,14 @@
 import Attribute from './Attribute';
 
-const Section = ({ name, data }) => {
-	const lowerName = name.toLowerCase();
+const Section = ({ type, data }) => {
+	const title = type[0].toUpperCase() + type.slice(1);
+
 	return (
-		<section id={lowerName}>
-			<h2>{name}</h2>
+		<section id={type}>
+			<h2>{title}</h2>
 			<ul>
 				{data.map((f) => (
-					<Attribute key={`${lowerName}-${f.id}`} type={lowerName} value={f} />
+					<Attribute key={`${type}-${f.id}`} type={type} value={f} />
 				))}
 			</ul>
 		</section>

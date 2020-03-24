@@ -7,10 +7,12 @@
 	--accent: #229989;
 	--highlight: #92ffaaf8;
 	--highlight-2: #9fbdfff8;
+	--transition: all 0.3s ease;
 	font-size: 16px;
 }
 
 body {
+	box-sizing: border-box;
 	margin: var(--one-space);
 	font-family: 'Open Sans', Helvetica, sans-serif;
 	color: var(--primary);
@@ -38,6 +40,15 @@ button, input[type="submit"] {
 	background: transparent;
 	margin: var(--one-space) 0;
 	border: var(--one-width) solid var(--highlight);
+	transition: var(--transition);
+}
+
+button:hover, button:focus, input[type="submit"]:hover, input[type="submit"]:focus { 
+	outline: none;
+	border-color: var(--highlight-2);
+	background-color: var(--highlight);
+	color: white;
+	cursor: pointer;
 }
 
 input[type="text"], input[type="password"], input[type="email"] {
@@ -57,7 +68,7 @@ a {
 	text-decoration: none;
 	padding: calc (var(--one-space) / 2) 0;
 	border-bottom: var(--one-width) solid var(--highlight-2);
-	transition: all 0.3s ease;
+	transition: var(--transition);
 }
 
 a:hover {

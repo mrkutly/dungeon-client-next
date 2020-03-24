@@ -3,6 +3,13 @@ import Header from './Header';
 import Stats from './Stats';
 import BasicInfo from './BasicInfo';
 import Section from './Section';
+import {
+	FEATURES,
+	PROFICIENCIES,
+	SKILLS,
+	SPELLS,
+	EQUIPMENT,
+} from './attributeTypes';
 
 const CharacterSheet = ({ character }) => (
 	<>
@@ -10,11 +17,11 @@ const CharacterSheet = ({ character }) => (
 		<SheetStyles>
 			<Stats character={character} />
 			<BasicInfo character={character} />
-			{character.features && <Section data={character.features} name="Features" />}
-			{character.proficiencies && <Section data={character.proficiencies} name="Proficiencies" />}
-			{character.skills && <Section data={character.skills} name="Skills" />}
-			{character.spells && <Section data={character.spells} name="Spells" />}
-			{character.equipment && <Section data={character.equipment} name="Equipment" />}
+			{character.features && <Section data={character.features} type={FEATURES} />}
+			{character.proficiencies && <Section data={character.proficiencies} type={PROFICIENCIES} />}
+			{character.skills && <Section data={character.skills} type={SKILLS} />}
+			{character.spells && <Section data={character.spells} type={SPELLS} />}
+			{character.equipment && <Section data={character.equipment} type={EQUIPMENT} />}
 		</SheetStyles>
 	</>
 );

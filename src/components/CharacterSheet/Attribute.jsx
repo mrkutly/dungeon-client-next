@@ -8,13 +8,16 @@ const Attribute = ({ type, value }) => {
 
 	/* Modal logic */
 	let close;
-	const innerModal = useRef();
+	const outsideModal = useRef();
+	const closeBtn = useRef();
+
 	const listener = useRef((e) => {
-		if (e.key && e.key === 'Escape') {
+		if (e.key === 'Escape') {
 			return close();
 		}
 
-		if (e.target !== innerModal.current) {
+		const isCloseTarget = [outsideModal.current, closeBtn.current].includes(e.target);
+		if (e.type === 'click' && isCloseTarget) {
 			close();
 		}
 	});
@@ -42,14 +45,22 @@ const Attribute = ({ type, value }) => {
 			>
 				{name}
 			</AttributeStyles>
-			{active && <Modal type={type} id={id} close={close} innerRef={innerModal} />}
+			{active && (
+				<Modal
+					type={type}
+					id={id}
+					close={close}
+					outerRef={outsideModal}
+					closeBtnRef={closeBtn}
+				/>
+			)}
 		</>
 	);
 };
 
 const AttributeStyles = styled.li`
 	cursor: pointer;
-	transition: all 0.3s ease;
+	transition: var(--transition);
 
 	&:hover, &:focus {
 		color: var(--accent);

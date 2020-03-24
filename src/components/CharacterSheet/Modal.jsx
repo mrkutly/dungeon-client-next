@@ -1,14 +1,28 @@
 import styled from 'styled-components';
 import useAttribute from '../../hooks/useAttribute';
+import Feature from './attribute-details/Feature';
+import {
+	FEATURES,
+	PROFICIENCIES,
+	SKILLS,
+	SPELLS,
+	EQUIPMENT,
+} from './attributeTypes';
 
-const Modal = ({ type, id, innerRef }) => {
+const Modal = ({
+	type, id, outerRef, closeBtnRef,
+}) => {
 	const { data, error, loading } = useAttribute(type, id);
+
 	return (
-		<ModalStyles>
-			<div ref={innerRef}>
-				{loading && <h1>loading...</h1>}
-				{error && <h3>{error}</h3>}
-				{data && <pre>{JSON.stringify(data, null, 2)}</pre>}
+		<ModalStyles ref={outerRef}>
+			<div className="wrapper">
+				<button ref={closeBtnRef} type="button">&times;</button>
+				<div className="details">
+					{loading && <h1>loading...</h1>}
+					{error && <h3>{error}</h3>}
+					{data && type === FEATURES && <Feature data={data} />}
+				</div>
 			</div>
 		</ModalStyles>
 	);
@@ -24,12 +38,23 @@ const ModalStyles = styled.div`
 	background-color: #00000066;
 	z-index: 1;
 
-	div {
+	button {
+		display: block;
+		margin-left: auto;
+		margin-right: var(--one-space);
+	}
+	
+	.details {
+		padding: 0 var(--one-space) var(--one-space);
+	}
+
+	.wrapper {
 		margin: auto;
 		background-color: white;
 		max-width: 90vw;
 		max-height: 90vh;
 		overflow: scroll;
+		border: var(--one-width) solid var(--highlight);
 	}
 `;
 
