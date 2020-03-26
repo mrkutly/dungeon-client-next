@@ -18,18 +18,18 @@ const Weapon = ({ data }) => {
 
 	return (
 		<>
-			<h1>{name}</h1>
+			<h2>{name}</h2>
 			<p><strong>Quantity:</strong> {quantity}</p>
 			<p>Weight (each): {weight}</p>
 			<p>Cost (each): {cost.quantity}{cost.unit}</p>
 			<p>Weapon type: {category_range}</p>
-			<p>Damage roll: {damage_dice}</p>
-			<p>Damage bonus: {damage_bonus}</p>
+			{damage_dice && <p>Damage roll: {damage_dice}</p>}
+			{typeof damage_bonus === 'number' && <p>Damage bonus: {damage_bonus}</p>}
 			{damage_type && <p>Damage type: {damage_type.name}</p>}
-			<p>Normal Range: {range.normal}</p>
-			{range.long && <p>Long Range: {range.long}</p>}
-			{throw_range.normal && <p>Short Throw Range: {throw_range.normal}</p>}
-			{throw_range.long && <p>Long Throw Range: {throw_range.long}</p>}
+			{range?.normal && <p>Normal Range: {range.normal}</p>}
+			{range?.long && <p>Long Range: {range.long}</p>}
+			{throw_range?.normal && <p>Short Throw Range: {throw_range.normal}</p>}
+			{throw_range?.long && <p>Long Throw Range: {throw_range.long}</p>}
 
 			{properties.length > 0 ? (
 				<>

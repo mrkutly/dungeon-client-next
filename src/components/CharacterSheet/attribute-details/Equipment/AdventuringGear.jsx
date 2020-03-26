@@ -6,7 +6,7 @@ const AdventuringGear = ({ data }) => {
 
 	return (
 		<>
-			<h1>{name}</h1>
+			<h2>{name}</h2>
 			<p>Category: {gear_category}</p>
 			<p>Cost: {cost.quantity}{cost.unit}</p>
 			<p>Weight: {weight}</p>
