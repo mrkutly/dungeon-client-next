@@ -15,7 +15,7 @@ export const attributeLoadError = (error) => ({
 	payload: error.message,
 });
 
-export const attributeLoadSuccess = (payloadType, id, attributeDetails) => {
+export const attributeLoadSuccess = (payloadType, _id, attributeDetails) => {
 	if (!Object.values(attributeTypes).includes(payloadType)) {
 		throw new Error('Invalid payload type in attributeLoadSuccess action');
 	}
@@ -23,19 +23,19 @@ export const attributeLoadSuccess = (payloadType, id, attributeDetails) => {
 	return ({
 		type: Actions.ATTRIBUTE_LOAD_SUCCESS,
 		payload: attributeDetails,
-		id,
+		_id,
 		payloadType,
 	});
 };
 
-export const loadAttribute = (type, id, controller) => async (dispatch) => {
+export const loadAttribute = (type, _id, controller) => async (dispatch) => {
 	try {
 		dispatch(attributeLoadStarted());
-		const result = await get(`/${type}/${id}`, null, controller);
+		const result = await get(`/${type}/${_id}`, null, controller);
 		if (result.error) {
 			throw new Error(result.error);
 		}
-		dispatch(attributeLoadSuccess(type, id, result.data));
+		dispatch(attributeLoadSuccess(type, _id, result.data));
 	} catch (error) {
 		if (!controller.signal.aborted) {
 			dispatch(attributeLoadError(error));

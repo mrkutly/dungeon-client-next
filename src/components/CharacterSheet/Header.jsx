@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const Heading = ({ character }) => {
 	const { level } = character;
 	const race = character.race.name;
-	const characterClass = character.character_class.name;
+	const characterClass = character.characterClass.name;
 	return (
 		<HeadingStyles>
 			<h1>

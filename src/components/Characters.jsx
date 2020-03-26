@@ -13,7 +13,7 @@ const Characters = () => {
 
 	return (
 		<CharacterListStyles>
-			{characters.map((c) => <li key={c.id}><CharacterCard character={c} /></li>)}
+			{characters.map((c) => <li key={c._id}><CharacterCard character={c} /></li>)}
 		</CharacterListStyles>
 	);
 };

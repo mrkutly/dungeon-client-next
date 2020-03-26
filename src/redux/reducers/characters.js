@@ -35,7 +35,7 @@ export default function reducer(state = initialState.characters, action) {
 		case Actions.CHARACTER_DETAILS_LOAD_SUCCESS: {
 			const data = state.data || [];
 			const characters = [...data];
-			const characterIndex = characters.findIndex((c) => c.id === action.payload.id);
+			const characterIndex = characters.findIndex((c) => c._id === action.payload._id);
 			action.payload.detailsLoaded = true;
 			if (characterIndex >= 0) {
 				characters[characterIndex] = action.payload;

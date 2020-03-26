@@ -23,7 +23,8 @@ const SignIn = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		await dispatch(signin(email, password));
+		const controller = new AbortController();
+		await dispatch(signin(email, password, controller));
 	};
 
 	return (

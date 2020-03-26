@@ -3,7 +3,7 @@ import joinIntoSentence from '../../lib/joinIntoSentence';
 
 const BasicInfo = ({ character }) => {
 	const {
-		max_hp, current_hp, experience, languages, conditions,
+		maxHp, currentHp, experience, languages, conditions,
 	} = character;
 
 	const languageNames = languages && languages.length ? languages.map((l) => l.name) : null;
@@ -12,7 +12,7 @@ const BasicInfo = ({ character }) => {
 	return (
 		<InfoStyles id="hp-and-experience">
 			<span>
-				HP {current_hp} / {max_hp}
+				HP {currentHp} / {maxHp}
 			</span>
 			<span>
 				EXP {experience}

@@ -1,5 +1,7 @@
 // import joinIntoSentence from '../../../lib/joinIntoSentence';
 
+// TODO: make different modals for different types of equipment
+
 const Proficiency = ({ data }) => {
 	const {
 		type, name, classes, races,

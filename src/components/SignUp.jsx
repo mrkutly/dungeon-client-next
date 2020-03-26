@@ -9,11 +9,14 @@ const SignIn = () => {
 	const [clientError, setClientError] = useState(null);
 	const { loading, error } = useSelector(({ auth }) => auth);
 	const [formData, setFormData] = useState({
+		name: '',
 		email: '',
 		password: '',
 		confirmPassword: '',
 	});
-	const { email, password, confirmPassword } = formData;
+	const {
+		name, email, password, confirmPassword,
+	} = formData;
 
 	const handleChange = ({ target }) => {
 		setFormData({
@@ -26,13 +29,18 @@ const SignIn = () => {
 		e.preventDefault();
 		setClientError(null);
 		if (password !== confirmPassword) return setClientError('Passwords gotta match :)');
-		dispatch(signup(email, password));
+		const controller = new AbortController();
+		dispatch(signup(name, email, password, confirmPassword, controller));
 	};
 
 	return (
 		<Centered>
 			<h1>Sign up</h1>
 			<form method="POST" onSubmit={handleSubmit} aria-busy={loading} disabled={loading}>
+				<label htmlFor="name">
+					Username
+					<input type="text" name="name" onChange={handleChange} value={name} />
+				</label>
 				<label htmlFor="email">
 					Email
 					<input type="email" name="email" onChange={handleChange} value={email} />

@@ -3,13 +3,13 @@ import Link from 'next/link';
 
 const CharacterCard = ({ character }) => {
 	const {
-		name, level, id,
+		name, level, _id,
 	} = character;
 	const race = character.race.name;
-	const characterClass = character.character_class.name;
+	const characterClass = character.characterClass.name;
 
 	return (
-		<Link href={`/characters/${id}`}>
+		<Link href={`/characters/${_id}`}>
 			<CardStyles>
 				<h2>
 					{name}

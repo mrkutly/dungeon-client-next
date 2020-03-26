@@ -9,7 +9,7 @@ const useCharacter = (id) => {
 	const loading = useSelector((s) => s.characters.loading);
 	const token = useSelector((s) => s.auth.token);
 	const dispatch = useDispatch();
-	const character = data && data.find((c) => c.id === id);
+	const character = data?.find((c) => c._id === id);
 
 	useEffect(() => {
 		if (character && !character.detailsLoaded) {

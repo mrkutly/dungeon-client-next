@@ -5,14 +5,14 @@ import CharacterSheet from './CharacterSheet';
 
 const CharacterPage = () => {
 	const router = useRouter();
-	const id = Number(router.query.id);
+	const id = router.query.id;
 	const { character, error, loading } = useCharacter(id);
 
 	return (
 		<HomeLayout>
 			{loading && <h1>loading...</h1>}
 			{error && <h1>{error}</h1>}
-			{character && !loading && <CharacterSheet character={character} />}
+			{character?.detailsLoaded && <CharacterSheet character={character} />}
 		</HomeLayout>
 	);
 };

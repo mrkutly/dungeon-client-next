@@ -39,10 +39,12 @@ export const signin = (email, password, controller) => async (dispatch) => {
 	}
 };
 
-export const signup = (email, password, controller) => async (dispatch) => {
+export const signup = (name, email, password, confirmPassword, controller) => async (dispatch) => {
 	try {
 		dispatch(signinStarted());
-		const result = await post('/signup', { email, password }, controller);
+		const result = await post('/signup', {
+			name, email, password, confirmPassword,
+		}, controller);
 		if (result.error) throw new Error(result.error);
 		dispatch(signinSuccess(result.token));
 		localStorage.setItem('authToken', result.token);

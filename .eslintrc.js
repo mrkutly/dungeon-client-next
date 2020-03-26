@@ -1,9 +1,11 @@
 module.exports = {
 	extends: ['airbnb'],
+	parser: 'babel-parser',
 	env: {
 		browser: true,
 	},
 	rules: {
+		'no-underscore-dangle': 0,
 		'react/react-in-jsx-scope': 0,
 		'react/jsx-indent': ['error', 'tab'],
 		'indent': ['error', 'tab', { SwitchCase: 1 }],
