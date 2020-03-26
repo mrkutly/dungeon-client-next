@@ -14,22 +14,19 @@ import {
 } from '../../redux/attributeTypes';
 
 const Modal = ({
-	type, id, outerRef, closeBtnRef,
+	type, outerRef, closeBtnRef, data
 }) => {
-	const { data, error, loading } = useAttribute(type, id);
 
 	return (
 		<ModalStyles ref={outerRef}>
 			<div className="wrapper">
 				<button ref={closeBtnRef} type="button">&times;</button>
 				<div className="details">
-					{loading && <h1>loading...</h1>}
-					{error && <h3>{error}</h3>}
-					{data && type === FEATURES && <Feature data={data} />}
-					{data && type === PROFICIENCIES && <Proficiency data={data} />}
-					{data && type === SKILLS && <Skill data={data} />}
-					{data && type === SPELLS && <Spell data={data} />}
-					{data && type === EQUIPMENT && <Equipment data={data} />}
+					{type === FEATURES && <Feature data={data} />}
+					{type === PROFICIENCIES && <Proficiency data={data} />}
+					{type === SKILLS && <Skill data={data} />}
+					{type === SPELLS && <Spell data={data} />}
+					{type === EQUIPMENT && <Equipment data={data} />}
 				</div>
 			</div>
 		</ModalStyles>

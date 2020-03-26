@@ -3,9 +3,14 @@ import { useState, useRef } from 'react';
 import Modal from './Modal';
 
 const Attribute = ({ type, value }) => {
-	const { name, id } = value;
 	const [active, setActive] = useState(false);
+	let { name, _id, quantity } = value;
 
+	if (type === 'equipment') {
+		name = value.item.name;
+		_id = value.item._id;
+	}
+	
 	/* Modal logic */
 	let close;
 	const outsideModal = useRef();
@@ -43,12 +48,13 @@ const Attribute = ({ type, value }) => {
 				onClick={handleSelect}
 				onKeyPress={(e) => e.key === 'Enter' && handleSelect()}
 			>
-				{name}
+				{quantity} {name}
 			</AttributeStyles>
 			{active && (
 				<Modal
 					type={type}
-					id={id}
+					data={value}
+					_id={_id}
 					close={close}
 					outerRef={outsideModal}
 					closeBtnRef={closeBtn}

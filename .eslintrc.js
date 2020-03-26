@@ -1,6 +1,6 @@
 module.exports = {
 	extends: ['airbnb'],
-	parser: 'babel-parser',
+	parser: 'babel-eslint',
 	env: {
 		browser: true,
 	},
@@ -21,5 +21,5 @@ module.exports = {
 		'prefer-const': 0,
 		'react/jsx-indent-props': ['error', 'tab'],
 		'react/jsx-one-expression-per-line': 0,
-	}
-}
+	},
+};
