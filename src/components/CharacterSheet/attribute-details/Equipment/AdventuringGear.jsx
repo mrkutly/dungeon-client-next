@@ -10,7 +10,7 @@ const AdventuringGear = ({ data }) => {
 			<p>Category: {gear_category}</p>
 			<p>Cost: {cost.quantity}{cost.unit}</p>
 			<p>Weight: {weight}</p>
-			{desc.map((d) => <p key={d}>{d}</p>)}
+			{desc && desc.map((d) => <p key={d}>{d}</p>)}
 		</>
 	);
 };

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import useAttribute from '../../hooks/useAttribute';
 import Feature from './attribute-details/Feature';
 import Proficiency from './attribute-details/Proficiency';
 import Skill from './attribute-details/Skill';
@@ -14,24 +13,21 @@ import {
 } from '../../redux/attributeTypes';
 
 const Modal = ({
-	type, outerRef, closeBtnRef, data
-}) => {
-
-	return (
-		<ModalStyles ref={outerRef}>
-			<div className="wrapper">
-				<button ref={closeBtnRef} type="button">&times;</button>
-				<div className="details">
-					{type === FEATURES && <Feature data={data} />}
-					{type === PROFICIENCIES && <Proficiency data={data} />}
-					{type === SKILLS && <Skill data={data} />}
-					{type === SPELLS && <Spell data={data} />}
-					{type === EQUIPMENT && <Equipment data={data} />}
-				</div>
+	type, outerRef, closeBtnRef, data,
+}) => (
+	<ModalStyles ref={outerRef}>
+		<div className="wrapper">
+			<button ref={closeBtnRef} type="button">&times;</button>
+			<div className="details">
+				{type === FEATURES && <Feature data={data} />}
+				{type === PROFICIENCIES && <Proficiency data={data} />}
+				{type === SKILLS && <Skill data={data} />}
+				{type === SPELLS && <Spell data={data} />}
+				{type === EQUIPMENT && <Equipment data={data} />}
 			</div>
-		</ModalStyles>
-	);
-};
+		</div>
+	</ModalStyles>
+);
 
 const ModalStyles = styled.div`
 	display: grid;
@@ -58,7 +54,7 @@ const ModalStyles = styled.div`
 		background-color: white;
 		max-width: 90vw;
 		max-height: 90vh;
-		min-width: 60vw;
+		min-width: 30vw;
 		overflow: scroll;
 		border: var(--one-width) solid var(--highlight);
 	}

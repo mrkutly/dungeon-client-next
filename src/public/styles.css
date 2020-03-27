@@ -30,7 +30,15 @@ h3 {
 	font-size: 2rem;
 }
 
-h1, h2, h3 {
+h4 {
+	font-size: 1.5rem;
+}
+
+p {
+	margin: 0.5em 0;
+}
+
+h1, h2, h3, h4 {
 	font-family: 'Poiret One', serif;
 	margin: calc(2 * var(--one-space)) 0;
 }
@@ -82,4 +90,24 @@ section#proficiencies h2,
 section#features h2, 
 section#spells h2 {
 	margin-top: 0;
+}
+
+section#equipment h2, 
+section#skills h2, 
+section#proficiencies h2, 
+section#features h2, 
+section#spells h2,
+section#equipment h3, 
+section#skills h3, 
+section#proficiencies h3, 
+section#features h3, 
+section#spells h3,
+section#equipment h4, 
+section#skills h4, 
+section#proficiencies h4, 
+section#features h4, 
+section#spells h4 {
+	padding-bottom: var(--one-width);
+	width: max-content;
+	border-bottom: var(--one-width) solid var(--highlight-2);
 }
