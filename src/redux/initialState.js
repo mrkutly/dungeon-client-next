@@ -12,9 +12,10 @@ export default {
 		data: [],
 		error: null,
 	},
-	attributes: {
+	search: {
 		loading: false,
 		error: null,
+		queries: [],
 		features: {},
 		skills: {},
 		proficiencies: {},
