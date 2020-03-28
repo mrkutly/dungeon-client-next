@@ -20,6 +20,7 @@ export default function reducer(state = initialState.new, action) {
 					classes: action.payload.classes,
 				},
 				character: {
+					...state.character,
 					race: action.payload.races[0],
 					characterClass: action.payload.classes[0],
 				},
