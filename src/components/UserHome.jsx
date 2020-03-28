@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import HomeLayout from './layouts/HomeLayout';
 import useCharacters from '../hooks/useCharacters';
 import Characters from './Characters';
@@ -11,8 +12,10 @@ const UserHome = () => {
 			{
 				data && (
 					<>
-						<h1>My Characters</h1>
-						<Characters />
+						<h1>Hello</h1>
+						{data.length === 0 ? (
+							<p><Link href="/characters/new"><a>Go here</a></Link> to create your fist character.</p>
+						) : <Characters />}
 					</>
 				)
 			}

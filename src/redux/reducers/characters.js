@@ -15,6 +15,7 @@ export default function reducer(state = initialState.characters, action) {
 				...state,
 				loading: false,
 				error: null,
+				fetched: true,
 				data: action.payload,
 			};
 
@@ -49,6 +50,15 @@ export default function reducer(state = initialState.characters, action) {
 				data: characters,
 			};
 		}
+
+		case Actions.ADD_CHARACTER:
+			return {
+				...state,
+				data: [
+					...state.data,
+					action.payload,
+				],
+			};
 
 		default:
 			return state;

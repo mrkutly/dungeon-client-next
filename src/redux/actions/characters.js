@@ -5,6 +5,11 @@ import { get } from '../../lib/fetches';
  * CHARACTERS ACTIONS
  */
 
+export const addCharacter = (character) => ({
+	type: Actions.ADD_CHARACTER,
+	payload: character,
+});
+
 export const characterLoadStarted = () => ({
 	type: Actions.CHARACTER_LOAD_STARTED,
 });

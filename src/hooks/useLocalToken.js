@@ -8,9 +8,10 @@ const useLocalToken = () => {
 
 	useEffect(() => {
 		if (!token && !checkedLocal) {
-			const foundToken = localStorage.getItem('authToken');
-			if (foundToken) {
-				dispatch(signinSuccess(foundToken));
+			const foundUser = localStorage.getItem('dungeonUser');
+			if (foundUser) {
+				const user = JSON.parse(foundUser);
+				dispatch(signinSuccess(user));
 			} else {
 				dispatch(localSignInFailed());
 			}

@@ -16,7 +16,8 @@ export default function reducer(state = initialState.auth, action) {
 				loading: false,
 				checkedLocal: true,
 				error: null,
-				token: action.payload,
+				user: action.payload.user,
+				token: action.payload.token,
 			};
 
 		case Actions.SIGNIN_ERROR:
@@ -24,6 +25,10 @@ export default function reducer(state = initialState.auth, action) {
 				...state,
 				loading: false,
 				token: null,
+				user: {
+					name: null,
+					email: null,
+				},
 				error: action.payload,
 			};
 

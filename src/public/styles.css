@@ -59,15 +59,75 @@ button:hover, button:focus, input[type="submit"]:hover, input[type="submit"]:foc
 	cursor: pointer;
 }
 
-input[type="text"], input[type="password"], input[type="email"] {
+input[type="text"], input[type="password"], input[type="email"], select {
 	width: calc(var(--one-space) * 20);
 	font-size: 1.2rem;
 	margin-left: var(--one-space);
 }
 
+input[type="number"] {
+	font-size: 1.2rem;
+	margin-left: var(--one-space);
+}
+
 label {
+	font-size: 1.2rem;
 	display: block;
 	margin: var(--one-space) 0;
+}
+
+@keyframes busy {
+	0% {
+		background: var(--highlight);
+	}
+	50% {
+		background: var(--highlight-2);
+	}
+	100% {
+		background: var(--highlight);
+	}
+}
+
+form:before, form:after {
+	content: '';
+	display: block;
+	height: var(--one-space);
+}
+
+form[aria-busy="true"]:before {
+	content: '';
+	display: block;
+	opacity: 0.4;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100vw;
+	height: calc(3 * var(--one-space));
+	animation: busy 1s ease infinite;
+}
+
+form[aria-busy="true"]:after {
+	content: '';
+	display: block;
+	opacity: 0.4;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100vw;
+	height: calc(3 * var(--one-space));
+	animation: busy 1s ease infinite;
+}
+
+fieldset {
+	border: none;
+	margin: calc(2 * var(--one-space)) 0;
+	padding: 0;
+}
+
+legend {
+	margin: var(--one-space) 0;
+	font-family: 'Poiret One', serif;
+	font-size: 2.5rem;
 }
 
 a {

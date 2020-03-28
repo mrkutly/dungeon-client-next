@@ -7,11 +7,14 @@ const headers = {
 	'Content-Type': 'application/json',
 };
 
-export const post = async (endpoint, data, controller = new AbortController()) => {
+export const post = async (endpoint, data, controller = new AbortController(), token) => {
 	const url = baseUrl + endpoint;
 	const response = await fetch(url, {
 		method: 'POST',
-		headers,
+		headers: {
+			...headers,
+			Authorization: token,
+		},
 		body: JSON.stringify(data),
 		signal: controller.signal,
 	});

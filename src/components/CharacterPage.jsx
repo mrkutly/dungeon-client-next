@@ -5,7 +5,7 @@ import CharacterSheet from './CharacterSheet';
 
 const CharacterPage = () => {
 	const router = useRouter();
-	const id = router.query.id;
+	const { id } = router.query;
 	const { character, error, loading } = useCharacter(id);
 
 	return (

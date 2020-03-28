@@ -15,9 +15,9 @@ export const signinError = (error) => ({
 	payload: error.message,
 });
 
-export const signinSuccess = (token) => ({
+export const signinSuccess = ({ token, user }) => ({
 	type: Actions.SIGNIN_SUCCESS,
-	payload: token,
+	payload: { token, user },
 });
 
 export const localSignInFailed = () => ({
@@ -29,8 +29,8 @@ export const signin = (email, password, controller) => async (dispatch) => {
 		dispatch(signinStarted());
 		const result = await post('/login', { email, password }, controller);
 		if (result.error) throw new Error(result.error);
-		dispatch(signinSuccess(result.token));
-		localStorage.setItem('authToken', result.token);
+		dispatch(signinSuccess({ user: result.user, token: result.token }));
+		localStorage.setItem('dungeonUser', JSON.stringify(result));
 		Router.push('/characters');
 	} catch (error) {
 		if (!controller.signal.aborted) {
