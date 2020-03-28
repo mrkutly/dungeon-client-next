@@ -46,12 +46,18 @@ export const signup = (name, email, password, confirmPassword, controller) => as
 			name, email, password, confirmPassword,
 		}, controller);
 		if (result.error) throw new Error(result.error);
-		dispatch(signinSuccess(result.token));
-		localStorage.setItem('authToken', result.token);
+		dispatch(signinSuccess({ user: result.user, token: result.token }));
+		localStorage.setItem('dungeonUser', JSON.stringify(result));
 		Router.push('/characters');
 	} catch (error) {
 		if (!controller.signal.aborted) {
 			dispatch(signinError(error));
 		}
 	}
+};
+
+export const signout = () => (dispatch) => {
+	localStorage.removeItem('dungeonUser');
+	dispatch({ type: Actions.SIGNOUT });
+	Router.push('/');
 };

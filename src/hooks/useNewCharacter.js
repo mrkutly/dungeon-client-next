@@ -11,12 +11,10 @@ const useNewCharacter = () => {
 	const formData = useSelector((s) => s.new.character);
 
 	useEffect(() => {
-		let controllerOne;
-		let controllerTwo;
+		const controllerOne = new AbortController();
+		const	controllerTwo	= new AbortController();
 
 		if (!races.length || !classes.length) {
-			controllerOne = new AbortController();
-			controllerTwo	= new AbortController();
 			dispatch(loadOptions(controllerOne, controllerTwo));
 		}
 

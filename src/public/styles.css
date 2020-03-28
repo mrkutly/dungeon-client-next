@@ -44,7 +44,8 @@ h1, h2, h3, h4 {
 }
 
 button, input[type="submit"] {
-	font-size: 1rem;
+	padding: 0.5rem;
+	font-size: 1.2rem;
 	background: transparent;
 	margin: var(--one-space) 0;
 	border: var(--one-width) solid var(--highlight);

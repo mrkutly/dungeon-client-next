@@ -10,7 +10,7 @@ const Attribute = ({ type, value }) => {
 		name = value.item.name;
 		_id = value.item._id;
 	}
-	
+
 	/* Modal logic */
 	let close;
 	const outsideModal = useRef();

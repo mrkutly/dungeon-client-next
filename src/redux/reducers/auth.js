@@ -38,6 +38,9 @@ export default function reducer(state = initialState.auth, action) {
 				checkedLocal: true,
 			};
 
+		case Actions.SIGNOUT:
+			return initialState.auth;
+
 		default:
 			return state;
 	}

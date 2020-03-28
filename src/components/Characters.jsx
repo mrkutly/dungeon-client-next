@@ -12,9 +12,11 @@ const Characters = () => {
 	if (!characters) return null;
 
 	return (
-		<CharacterListStyles>
-			{characters.map((c) => <li key={c._id}><CharacterCard character={c} /></li>)}
-		</CharacterListStyles>
+		<>
+			<CharacterListStyles>
+				{characters.map((c) => <li key={c._id}><CharacterCard character={c} /></li>)}
+			</CharacterListStyles>
+		</>
 	);
 };
 

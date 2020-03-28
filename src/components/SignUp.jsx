@@ -28,7 +28,7 @@ const SignIn = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setClientError(null);
-		if (password !== confirmPassword) return setClientError('Passwords gotta match :)');
+		if (password !== confirmPassword) return setClientError('Passwords gotta match 😉');
 		const controller = new AbortController();
 		dispatch(signup(name, email, password, confirmPassword, controller));
 	};

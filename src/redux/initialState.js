@@ -4,6 +4,7 @@ export default {
 		loading: false,
 		error: null,
 		checkedLocal: false,
+		user: null,
 	},
 	characters: {
 		fetched: false,
