@@ -1,6 +1,6 @@
 const baseUrl = process.env.NODE_ENV === 'development'
 	? 'http://localhost:8888'
-	: 'https://dungeon-api-staging.herokuapp.com/api/v1';
+	: 'http://localhost:8888';
 
 const headers = {
 	Accept: 'application/json',
