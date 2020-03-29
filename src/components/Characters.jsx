@@ -13,12 +13,12 @@ const Characters = () => {
 	if (!characters) return null;
 
 	return (
-		<>
+		<div style={{ marginBottom: 'calc(2 * var(--one-space))' }}>
 			<CharacterListStyles>
 				{characters.map((c) => <li key={c._id}><CharacterCard character={c} /></li>)}
 			</CharacterListStyles>
 			<Link href="/characters/new"><a>Make a new character</a></Link>
-		</>
+		</div>
 	);
 };
 

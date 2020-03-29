@@ -14,7 +14,7 @@ const useSearch = (type, query) => {
 	const data = Object.values(unfiltered).filter((d) => matcher.test(sanitize(d.name)));
 
 	useEffect(() => {
-		if (!(query?.length > 0)) return;
+		if (!(query?.length > 1)) return;
 
 		const controller = new AbortController();
 		dispatch(search(type, query, controller));
