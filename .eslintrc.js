@@ -3,6 +3,11 @@ module.exports = {
 	parser: 'babel-eslint',
 	env: {
 		browser: true,
+		jest: true,
+	},
+	globals: {
+		cy: "readable",
+		Cypress: "readable",
 	},
 	rules: {
 		'no-underscore-dangle': 0,

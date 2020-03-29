@@ -1,0 +1,9 @@
+{
+	"baseUrl": "http://localhost:7777",
+	"env": {
+		"backend": "http://localhost:8888",
+		"email": "cypress-test@dungeon.com",
+		"name": "Cypress Suite",
+		"password": "Cypres123!"
+	}
+}
