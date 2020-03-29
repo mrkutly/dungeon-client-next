@@ -12,6 +12,7 @@ const Search = ({ type }) => {
 	const debouncedSetQuery = debounce(setQuery, 300);
 	const { data, error, loading } = useSearch(type, query);
 	const characterId = Router.query.id;
+
 	const add = () => {
 		const controller = new AbortController();
 		dispatch(update({ type, characterId, data: data[0] }, controller));
@@ -35,7 +36,12 @@ const Search = ({ type }) => {
 				/>
 				<button type="button" onClick={add}>Add</button>
 			</div>
-			<datalist id={`${type}-list`} name={`${type}-list`} style={{ maxHeight: '10vh' }}>
+			<datalist
+				id={`${type}-list`}
+				name={`${type}-list`}
+				style={{ maxHeight: '10vh' }}
+			>
+				{data.length === 0 && <option>No Results</option>}
 				{data.map((d) => <option key={d.index}>{d.name}</option>)}
 			</datalist>
 		</SearchSyles>
