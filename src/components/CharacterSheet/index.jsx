@@ -35,6 +35,9 @@ const CharacterSheet = ({ character }) => {
 					maxHp={character.maxHp}
 					currentHp={character.currentHp}
 					experience={character.experience}
+					gold={character.gold}
+					silver={character.silver}
+					copper={character.copper}
 					editMode={editMode}
 				/>
 				<Section data={character.features} type={FEATURES} editMode={editMode} />
