@@ -35,6 +35,19 @@ export const put = async (endpoint, data, controller = new AbortController(), to
 	return response.json();
 };
 
+export const del = async (endpoint, controller = new AbortController(), token) => {
+	const url = baseUrl + endpoint;
+	const response = await fetch(url, {
+		method: 'DELETE',
+		headers: {
+			...headers,
+			Authorization: token,
+		},
+		signal: controller.signal,
+	});
+	return response.json();
+};
+
 export const get = async (endpoint, token = '', controller = new AbortController()) => {
 	const url = baseUrl + endpoint;
 	const response = await fetch(url, {

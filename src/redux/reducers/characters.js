@@ -101,6 +101,22 @@ export default function reducer(state = initialState.characters, action) {
 				error: null,
 			};
 
+		case Actions.UPDATE_EQUIPMENT_SUCCESS: {
+			const { equipment, characterId } = action.payload;
+			return {
+				...state,
+				loading: false,
+				error: null,
+				data: {
+					...state.data,
+					[characterId]: {
+						...state.data[characterId],
+						equipment,
+					},
+				},
+			};
+		}
+
 		case Actions.UPDATE_CHARACTER_ERROR:
 			return {
 				...state,
@@ -109,6 +125,48 @@ export default function reducer(state = initialState.characters, action) {
 				loading: false,
 				error: action.payload,
 			};
+
+		case Actions.REMOVE_ATTRIBUTE_START: {
+			const { characterId, type, attributeId } = action.payload;
+			const character = state.data[characterId];
+			const updated = character[type].filter((a) => a._id !== attributeId);
+
+			return {
+				...state,
+				prevData: state.data,
+				loading: true,
+				error: null,
+				data: {
+					...state.data,
+					[characterId]: {
+						...state.data[characterId],
+						[type]: updated,
+					},
+				},
+			};
+		}
+
+
+		case Actions.UPDATE_EQUIPMENT_QUANTITY_START: {
+			const { characterId, equipmentId, quantity } = action.payload;
+			const { equipment } = state.data[characterId];
+			const idx = equipment.findIndex((e) => e._id === equipmentId);
+			equipment[idx].quantity = quantity;
+
+			return {
+				...state,
+				prevData: state.data,
+				loading: true,
+				error: null,
+				data: {
+					...state.data,
+					[characterId]: {
+						...state.data[characterId],
+						equipment,
+					},
+				},
+			};
+		}
 
 		default:
 			return state;
