@@ -6,10 +6,13 @@ export default function reducer(state = initialState.search, action) {
 		case Actions.SEARCH_STARTED:
 			return {
 				...state,
-				queries: [
+				queries: {
 					...state.queries,
-					action.payload.query,
-				],
+					[action.payload.type]: [
+						...state.queries[action.payload.type],
+						action.payload.query,
+					],
+				},
 				[action.payload.type]: {
 					...state[action.payload.type],
 					loading: false,

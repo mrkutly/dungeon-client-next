@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { search } from '../redux/actions/search';
-
-const sanitize = (string) => string?.toLowerCase().replace(/[^0-9a-z]/gi, '');
+import sanitize from '../lib/sanitize';
 
 const useSearch = (type, query) => {
 	const dispatch = useDispatch();

@@ -31,10 +31,7 @@ export const search = (type, query, controller) => async (dispatch, getState) =>
 	// if the search query contains any previously searched queries,
 	// we already have all the data we need in state.
 	const state = getState();
-	const resultIsCached = state.search.queries.some((q) => {
-		const lowerQuery = query.toLowerCase();
-		return lowerQuery.includes(q);
-	});
+	const resultIsCached = state.search.queries[type].some((q) => query.includes(q));
 
 	if (resultIsCached) {
 		return dispatch(searchSuccess(type, {}));

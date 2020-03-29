@@ -14,7 +14,13 @@ export default {
 		error: null,
 	},
 	search: {
-		queries: [],
+		queries: {
+			features: [],
+			skills: [],
+			proficiencies: [],
+			spells: [],
+			equipment: [],
+		},
 		features: {
 			loading: false,
 			error: null,
