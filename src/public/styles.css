@@ -163,7 +163,7 @@ section#skills h2,
 section#proficiencies h2, 
 section#features h2, 
 section#spells h2 {
-	margin-top: 0;
+	margin: 0;
 }
 
 section#equipment h2, 

@@ -20,14 +20,8 @@ const Search = ({ type }) => {
 
 	return (
 		<SearchSyles>
-			<div className="message">
-				{
-					loading ? 'loading...' : error
-				}
-			</div>
 			<div className="search-controls">
 				<input
-					autoComplete="off"
 					type="text"
 					aria-label="search"
 					placeholder={`Search to add ${type}`}
@@ -41,16 +35,23 @@ const Search = ({ type }) => {
 				name={`${type}-list`}
 				style={{ maxHeight: '10vh' }}
 			>
-				{data.length === 0 ? <option disabled>No Results</option>
-					: <>{data.slice(0, 5).map((d) => <option key={d.index}>{d.name}</option>)}</>}
+				{
+					data.slice(0, 5).map((d) => <option key={d._id}>{d.name}</option>)
+				}
 			</datalist>
+			<div className="message">
+				{data.length === 0 && query?.length > 0 ? 'No Results 🙁' : null}
+				{
+					loading ? 'loading...' : error
+				}
+			</div>
 		</SearchSyles>
 	);
 };
 
 const SearchSyles = styled.div`
 	.message {
-		min-height: 1.2rem;
+		min-height: 1.8rem;
 	}
 	input {
 		margin-left: 0;
