@@ -4,10 +4,8 @@ import { useSelector } from 'react-redux';
 import CharacterCard from './CharacterCard';
 
 const Characters = () => {
-	const {
-		error,
-		data: characters,
-	} = useSelector((s) => s.characters);
+	const { error, data } = useSelector((s) => s.characters);
+	const characters = Object.values(data);
 
 	if (error) return <h1>{error}</h1>;
 	if (!characters) return null;

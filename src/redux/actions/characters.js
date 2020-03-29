@@ -29,7 +29,13 @@ export const loadCharacters = (token, controller) => async (dispatch) => {
 		dispatch(characterLoadStarted());
 		const result = await get('/characters', token, controller);
 		if (result.error) throw new Error(result.error);
-		dispatch(characterLoadSuccess(result.characters));
+
+		// turn the array into an object for faster reads and updates
+		const characters = {};
+		result.characters.forEach((char) => {
+			characters[char._id] = char;
+		});
+		dispatch(characterLoadSuccess(characters));
 	} catch (error) {
 		if (!controller.signal.aborted) {
 			dispatch(characterLoadError(error));
@@ -72,6 +78,10 @@ export const getCharacterDetails = (character, token, controller) => async (disp
  * UPDATE CHARACTER ACTIONS
  */
 
+export const numericUpdateStarted = ({ characterId, updates }) => ({
+	type: Actions.NUMERIC_UPDATE_START,
+	payload: { characterId, updates },
+});
 
 export const updateStarted = ({ type, characterId, data }) => ({
 	type: Actions.UPDATE_CHARACTER_START,
@@ -88,29 +98,6 @@ export const updateSuccess = () => ({
 });
 
 const getParam = (type, data) => {
-	const numeric = [
-		'experience',
-		'maxHp',
-		'currentHp',
-		'gold',
-		'silver',
-		'copper',
-		'dexterity',
-		'strength',
-		'constitution',
-		'wisdom',
-		'intelligence',
-		'charisma',
-		'level',
-	];
-
-	if (numeric.includes(type)) {
-		return {
-			localParam: Number(data),
-			updateParam: Number(data),
-		};
-	}
-
 	if (type === 'equipment') {
 		return {
 			localParam: { quantity: 1, item: data },
@@ -124,14 +111,30 @@ const getParam = (type, data) => {
 	};
 };
 
+// This action will update relational data, like spells or equipment
 export const update = ({ type, characterId, data }, controller) => async (dispatch, getState) => {
-	const { token } = getState().auth;
-	// the backend just needs an id, but locally we want the whole object.
-	const { updateParam, localParam } = getParam(type, data);
-
 	try {
+		const { token } = getState().auth;
+		// the backend just needs an id, but locally we want the whole object.
+		const { updateParam, localParam } = getParam(type, data);
+
 		dispatch(updateStarted({ type, characterId, data: localParam }));
 		const result = await put(`/characters/${characterId}`, { [type]: updateParam }, controller, token);
+		if (result.error) throw new Error(result.error);
+		dispatch(updateSuccess());
+	} catch (error) {
+		if (!controller.signal.aborted) {
+			dispatch(updateError(error));
+		}
+	}
+};
+
+// This action updates basic numeric stats like HP, EXP, or Gold
+export const updateStats = ({ characterId, updates }, controller) => async (dispatch, getState) => {
+	try {
+		const { token } = getState().auth;
+		dispatch(numericUpdateStarted({ characterId, updates }));
+		const result = await put(`/characters/${characterId}`, updates, controller, token);
 		if (result.error) throw new Error(result.error);
 		dispatch(updateSuccess());
 	} catch (error) {

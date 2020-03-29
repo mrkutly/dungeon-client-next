@@ -9,7 +9,7 @@ export default {
 	characters: {
 		fetched: false,
 		loading: false,
-		data: [],
+		data: {},
 		prevData: null,
 		error: null,
 	},

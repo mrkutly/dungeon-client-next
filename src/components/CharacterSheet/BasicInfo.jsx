@@ -1,7 +1,7 @@
 /* eslint-disable react/destructuring-assignment */
 import styled from 'styled-components';
 import { useState } from 'react';
-// import { useDispatch } from 'react-redux';
+import useEdit from '../../hooks/useEdit';
 
 const Display = ({
 	maxHp, currentHp, experience, gold, silver, copper,
@@ -25,21 +25,8 @@ const Display = ({
 	</InfoStyles>
 );
 
-const Edit = ({
-	maxHp, currentHp, experience, gold, silver, copper,
-}) => {
-	// const dispatch = useDispatch();
-	const [data, setData] = useState({
-		currentHp,
-		maxHp,
-		experience,
-		gold,
-		silver,
-		copper,
-	});
-
-	const handleChange = (e) => setData({ ...data, [e.target.name]: e.target.value });
-
+const Edit = () => {
+	const { edits, handleEdit } = useEdit();
 	return (
 		<InfoStyles id="hp-and-experience">
 			<div>
@@ -48,8 +35,8 @@ const Edit = ({
 					type="number"
 					aria-label="current-hp"
 					name="currentHp"
-					value={data.currentHp}
-					onChange={handleChange}
+					value={edits.currentHp}
+					onChange={handleEdit}
 					size="3"
 				/>
 				/
@@ -57,8 +44,8 @@ const Edit = ({
 					type="number"
 					aria-label="max-hp"
 					name="maxHp"
-					value={data.maxHp}
-					onChange={handleChange}
+					value={edits.maxHp}
+					onChange={handleEdit}
 					size={3}
 				/>
 
@@ -69,8 +56,8 @@ const Edit = ({
 					type="number"
 					aria-label="experience"
 					name="experience"
-					value={data.experience}
-					onChange={handleChange}
+					value={edits.experience}
+					onChange={handleEdit}
 				/>
 			</div>
 			<div>
@@ -79,8 +66,8 @@ const Edit = ({
 					type="number"
 					aria-label="gold"
 					name="gold"
-					value={data.gold}
-					onChange={handleChange}
+					value={edits.gold}
+					onChange={handleEdit}
 				/>
 			</div>
 			<div>
@@ -89,8 +76,8 @@ const Edit = ({
 					type="number"
 					aria-label="silver"
 					name="silver"
-					value={data.silver}
-					onChange={handleChange}
+					value={edits.silver}
+					onChange={handleEdit}
 				/>
 			</div>
 			<div>
@@ -99,8 +86,8 @@ const Edit = ({
 					type="number"
 					aria-label="copper"
 					name="copper"
-					value={data.copper}
-					onChange={handleChange}
+					value={edits.copper}
+					onChange={handleEdit}
 				/>
 			</div>
 		</InfoStyles>
@@ -109,7 +96,7 @@ const Edit = ({
 
 const BasicInfo = (props) => {
 	if (!props.editMode) return <Display {...props} />;
-	return <Edit {...props} />;
+	return <Edit />;
 };
 
 const InfoStyles = styled.section`

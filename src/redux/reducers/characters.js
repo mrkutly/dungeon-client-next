@@ -34,48 +34,63 @@ export default function reducer(state = initialState.characters, action) {
 			};
 
 		case Actions.CHARACTER_DETAILS_LOAD_SUCCESS: {
-			const data = state.data || [];
-			const characters = [...data];
-			const characterIndex = characters.findIndex((c) => c._id === action.payload._id);
 			action.payload.detailsLoaded = true;
-			if (characterIndex >= 0) {
-				characters[characterIndex] = action.payload;
-			} else {
-				characters.push(action.payload);
-			}
 
 			return {
 				...state,
 				loading: false,
-				data: characters,
+				data: {
+					...state.data,
+					[action.payload._id]: action.payload,
+				},
 			};
 		}
 
 		case Actions.ADD_CHARACTER:
 			return {
 				...state,
-				data: [
+				data: {
 					...state.data,
-					action.payload,
-				],
+					[action.payload._id]: action.payload,
+				},
 			};
 
 		case Actions.UPDATE_CHARACTER_START: {
 			const characters = state.data;
 			const { type, characterId, data } = action.payload;
-			const characterIdx = characters.findIndex((c) => c._id === characterId);
-			const updatedData = typeof characters[characterIdx][type] === 'object'
-				? [...characters[characterIdx][type], data]
+			const updatedData = typeof characters[characterId][type] === 'object'
+				? [...characters[characterId][type], data]
 				: [data];
-
-			characters[characterIdx][type] = updatedData;
 
 			return {
 				...state,
 				prevData: state.data,
-				data: characters,
+				data: {
+					...state.data,
+					[characterId]: {
+						...state.data[characterId],
+						[type]: updatedData,
+					},
+				},
 				loading: true,
 				error: null,
+			};
+		}
+
+		case Actions.NUMERIC_UPDATE_START: {
+			const { characterId, updates } = action.payload;
+			return {
+				...state,
+				prevData: state.data,
+				loading: true,
+				error: null,
+				data: {
+					...state.data,
+					[characterId]: {
+						...state.data[characterId],
+						...updates,
+					},
+				},
 			};
 		}
 

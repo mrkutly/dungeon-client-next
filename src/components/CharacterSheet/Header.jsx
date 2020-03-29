@@ -1,10 +1,25 @@
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import Router from 'next/router';
+import useEdit from '../../hooks/useEdit';
+import { updateStats } from '../../redux/actions/characters';
 
 const Heading = ({ character, editMode, setEditMode }) => {
 	const { level } = character;
 	const race = character.race.name;
 	const characterClass = character.characterClass.name;
-	const handleClick = editMode ? () => setEditMode(false) : () => setEditMode(true);
+	const { edits } = useEdit();
+	const dispatch = useDispatch();
+
+	const save = () => {
+		const characterId = Router.query.id;
+		dispatch(updateStats({ characterId, updates: edits }));
+		setEditMode(false);
+	};
+
+	const handleClick = editMode ? save : () => setEditMode(true);
+
+
 	return (
 		<HeadingStyles>
 			<span>
