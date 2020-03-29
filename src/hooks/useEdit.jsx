@@ -18,7 +18,26 @@ export const Provider = ({ character, children }) => {
 		copper: character.copper,
 	});
 
+	const limited = [
+		'dexterity',
+		'strength',
+		'constitution',
+		'wisdom',
+		'intelligence',
+		'charisma',
+	];
+
+	const validate = ({ name, value }) => {
+		value = Number(value);
+		if (value < 0) return false;
+		if (limited.includes(name) && value > 20) return false;
+		if (name === 'currentHp' && value > edits.maxHp) return false;
+		return true;
+	};
+
 	const handleEdit = (e) => {
+		const isValid = validate(e.target);
+		if (!isValid) return;
 		setEdits({
 			...edits,
 			[e.target.name]: Number(e.target.value),
