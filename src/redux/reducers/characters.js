@@ -60,6 +60,37 @@ export default function reducer(state = initialState.characters, action) {
 				],
 			};
 
+		case Actions.UPDATE_CHARACTER_START: {
+			const characters = state.data;
+			const { type, characterId, data } = action.payload;
+			const characterIdx = characters.findIndex((c) => c._id === characterId);
+			characters[characterIdx][type] = [...characters[characterIdx][type], data];
+
+			return {
+				...state,
+				prevData: state.data,
+				data: characters,
+				loading: true,
+				error: null,
+			};
+		}
+
+		case Actions.UPDATE_CHARACTER_SUCCESS:
+			return {
+				...state,
+				loading: false,
+				error: null,
+			};
+
+		case Actions.UPDATE_CHARACTER_ERROR:
+			return {
+				...state,
+				prevData: null,
+				data: state.prevData,
+				loading: false,
+				error: action.payload,
+			};
+
 		default:
 			return state;
 	}

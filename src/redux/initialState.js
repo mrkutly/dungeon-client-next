@@ -10,6 +10,7 @@ export default {
 		fetched: false,
 		loading: false,
 		data: [],
+		prevData: null,
 		error: null,
 	},
 	search: {

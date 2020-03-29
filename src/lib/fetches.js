@@ -21,6 +21,20 @@ export const post = async (endpoint, data, controller = new AbortController(), t
 	return response.json();
 };
 
+export const put = async (endpoint, data, controller = new AbortController(), token) => {
+	const url = baseUrl + endpoint;
+	const response = await fetch(url, {
+		method: 'PUT',
+		headers: {
+			...headers,
+			Authorization: token,
+		},
+		body: JSON.stringify(data),
+		signal: controller.signal,
+	});
+	return response.json();
+};
+
 export const get = async (endpoint, token = '', controller = new AbortController()) => {
 	const url = baseUrl + endpoint;
 	const response = await fetch(url, {

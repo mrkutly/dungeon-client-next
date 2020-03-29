@@ -1,5 +1,5 @@
 import * as Actions from '../actionTypes';
-import { get } from '../../lib/fetches';
+import { get, put } from '../../lib/fetches';
 
 /**
  * CHARACTERS ACTIONS
@@ -63,6 +63,48 @@ export const getCharacterDetails = (character, token, controller) => async (disp
 	} catch (error) {
 		if (!controller.signal.aborted) {
 			dispatch(characterLoadError(error));
+		}
+	}
+};
+
+
+/**
+ * UPDATE CHARACTER ACTIONS
+ */
+
+
+export const updateStarted = ({ type, characterId, data }) => ({
+	type: Actions.UPDATE_CHARACTER_START,
+	payload: { type, characterId, data },
+});
+
+export const updateError = (error) => ({
+	type: Actions.UPDATE_CHARACTER_ERROR,
+	payload: error.message,
+});
+
+export const updateSuccess = () => ({
+	type: Actions.UPDATE_CHARACTER_SUCCESS,
+});
+
+export const update = ({ type, characterId, data }, controller) => async (dispatch, getState) => {
+	const { token } = getState().auth;
+	// the backend just needs an id, but locally we want the whole object.
+	let updateParam = data._id;
+	let localParam = data;
+	if (type === 'equipment') {
+		localParam = { quantity: 1, item: data };
+		updateParam = { quantity: 1, item: data._id };
+	}
+
+	try {
+		dispatch(updateStarted({ type, characterId, data: localParam }));
+		const result = await put(`/characters/${characterId}`, { [type]: [updateParam] }, controller, token);
+		if (result.error) throw new Error(result.error);
+		dispatch(updateSuccess());
+	} catch (error) {
+		if (!controller.signal.aborted) {
+			dispatch(updateError(error));
 		}
 	}
 };
