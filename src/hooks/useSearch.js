@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { search } from '../redux/actions/search';
+import { loadData, cacheResult } from '../redux/actions/search';
 import sanitize from '../lib/sanitize';
 
 const useSearch = (type, query) => {
@@ -8,15 +8,24 @@ const useSearch = (type, query) => {
 	const error = useSelector((s) => s.search[type].error);
 	const loading = useSelector((s) => s.search[type].loading);
 	const unfiltered = useSelector((s) => s.search[type].data);
+	const cache = useSelector((s) => s.search[type].cache);
+	const dataFetched = unfiltered.length > 0;
 	const sanitizedQuery = sanitize(query);
-	const matcher = new RegExp(sanitizedQuery, 'i');
-	const data = Object.values(unfiltered).filter((d) => matcher.test(sanitize(d.name)));
+	let data = [];
+
+	if (cache[sanitizedQuery] && dataFetched) {
+		data = cache[sanitizedQuery];
+	} else if (dataFetched && sanitizedQuery?.length > 0) {
+		const matcher = new RegExp(sanitizedQuery, 'i');
+		data = unfiltered.filter((d) => matcher.test(sanitize(d.name)));
+		dispatch(cacheResult({ type, query: sanitizedQuery, result: data }));
+	}
 
 	useEffect(() => {
-		if (!(query?.length > 1)) return;
+		if (!(query?.length > 0) || dataFetched) return;
 
 		const controller = new AbortController();
-		dispatch(search(type, query, controller));
+		dispatch(loadData(type, controller));
 
 		return () => controller.abort();
 	}, [query]);

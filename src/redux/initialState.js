@@ -14,37 +14,35 @@ export default {
 		error: null,
 	},
 	search: {
-		queries: {
-			features: [],
-			skills: [],
-			proficiencies: [],
-			spells: [],
-			equipment: [],
-		},
 		features: {
 			loading: false,
 			error: null,
-			data: {},
+			data: [],
+			cache: {},
 		},
 		skills: {
 			loading: false,
 			error: null,
-			data: {},
+			data: [],
+			cache: {},
 		},
 		proficiencies: {
 			loading: false,
 			error: null,
-			data: {},
+			data: [],
+			cache: {},
 		},
 		spells: {
 			loading: false,
 			error: null,
-			data: {},
+			data: [],
+			cache: {},
 		},
 		equipment: {
 			loading: false,
 			error: null,
-			data: {},
+			data: [],
+			cache: {},
 		},
 	},
 	new: {

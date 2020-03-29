@@ -3,53 +3,48 @@ import { get } from '../../lib/fetches';
 import attributeTypes from '../attributeTypes';
 
 /**
- * ATTRIBUTES ACTIONS
+ * SEARCH ACTIONS
  */
 
-export const searchStarted = (type, query) => ({
-	type: Actions.SEARCH_STARTED,
-	payload: { type, query },
+export const searchLoadStarted = (type) => ({
+	type: Actions.SEARCH_LOAD_STARTED,
+	payload: { type },
 });
 
-export const searchError = (error, type) => ({
-	type: Actions.SEARCH_ERROR,
+export const searchLoadError = (error, type) => ({
+	type: Actions.SEARCH_LOAD_ERROR,
 	payload: { error, type },
 });
 
-export const searchSuccess = (type, data) => {
+export const searchLoadSuccess = (type, data) => {
 	if (!Object.values(attributeTypes).includes(type)) {
 		throw new Error('Invalid payload type in searchSuccess action');
 	}
 
 	return ({
-		type: Actions.SEARCH_SUCCESS,
+		type: Actions.SEARCH_LOAD_SUCCESS,
 		payload: { type, data },
 	});
 };
 
-export const search = (type, query, controller) => async (dispatch, getState) => {
-	// if the search query contains any previously searched queries,
-	// we already have all the data we need in state.
-	const state = getState();
-	const resultIsCached = state.search.queries[type].some((q) => query.includes(q));
+export const cacheResult = ({ type, query, result }) => ({
+	type: Actions.CACHE_RESULT,
+	payload: { type, query, result },
+});
 
-	if (resultIsCached) {
-		return dispatch(searchSuccess(type, {}));
-	}
-
+export const loadData = (type, controller) => async (dispatch) => {
 	try {
-		dispatch(searchStarted(type, query.toLowerCase()));
+		dispatch(searchLoadStarted(type));
 
-		const result = await get(`/${type}?name=${query}`, null, controller);
+		const result = await get(`/${type}`, null, controller);
 		if (result.error) {
 			throw new Error(result.error);
 		}
-		const data = {};
-		result.data.forEach((d) => { data[d.index] = d; });
-		dispatch(searchSuccess(type, data));
+
+		dispatch(searchLoadSuccess(type, result.data));
 	} catch (error) {
 		if (!controller.signal.aborted) {
-			dispatch(searchError(error.message, type));
+			dispatch(searchLoadError(error.message, type));
 		}
 	}
 };

@@ -41,8 +41,8 @@ const Search = ({ type }) => {
 				name={`${type}-list`}
 				style={{ maxHeight: '10vh' }}
 			>
-				{data.length === 0 && <option>No Results</option>}
-				{data.map((d) => <option key={d.index}>{d.name}</option>)}
+				{data.length === 0 ? <option disabled>No Results</option>
+					: <>{data.slice(0, 5).map((d) => <option key={d.index}>{d.name}</option>)}</>}
 			</datalist>
 		</SearchSyles>
 	);
