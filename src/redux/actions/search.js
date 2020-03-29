@@ -6,14 +6,14 @@ import attributeTypes from '../attributeTypes';
  * ATTRIBUTES ACTIONS
  */
 
-export const searchStarted = (query) => ({
+export const searchStarted = (type, query) => ({
 	type: Actions.SEARCH_STARTED,
-	payload: query,
+	payload: { type, query },
 });
 
-export const searchError = (error) => ({
+export const searchError = (error, type) => ({
 	type: Actions.SEARCH_ERROR,
-	payload: error.message,
+	payload: { error, type },
 });
 
 export const searchSuccess = (type, data) => {
@@ -27,27 +27,32 @@ export const searchSuccess = (type, data) => {
 	});
 };
 
-export const loadAttribute = (type, query, controller) => async (dispatch, getState) => {
+export const search = (type, query, controller) => async (dispatch, getState) => {
 	// if the search query contains any previously searched queries,
 	// we already have all the data we need in state.
 	const state = getState();
-	const resultIsCached = state.search.queries.some((q) => query.includes(q));
+	const resultIsCached = state.search.queries.some((q) => {
+		const lowerQuery = query.toLowerCase();
+		return lowerQuery.includes(q);
+	});
 
 	if (resultIsCached) {
 		return dispatch(searchSuccess(type, {}));
 	}
 
 	try {
-		dispatch(searchStarted(query));
+		dispatch(searchStarted(type, query.toLowerCase()));
 
-		const result = await get(`/${type}?query=${query}`, null, controller);
+		const result = await get(`/${type}?name=${query}`, null, controller);
 		if (result.error) {
 			throw new Error(result.error);
 		}
-		dispatch(searchSuccess(type, result.data));
+		const data = {};
+		result.data.forEach((d) => { data[d.index] = d; });
+		dispatch(searchSuccess(type, data));
 	} catch (error) {
 		if (!controller.signal.aborted) {
-			dispatch(searchError(error));
+			dispatch(searchError(error.message, type));
 		}
 	}
 };

@@ -63,7 +63,12 @@ button:hover, button:focus, input[type="submit"]:hover, input[type="submit"]:foc
 input[type="text"], input[type="password"], input[type="email"], select {
 	width: calc(var(--one-space) * 20);
 	font-size: 1.2rem;
-	margin-left: var(--one-space);
+	margin: var(--one-space);
+	background: white;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-bottom: var(--one-width) var(--highlight-2) solid;
 }
 
 input[type="number"] {

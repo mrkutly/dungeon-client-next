@@ -6,30 +6,39 @@ export default function reducer(state = initialState.search, action) {
 		case Actions.SEARCH_STARTED:
 			return {
 				...state,
-				loading: true,
-				error: null,
 				queries: [
 					...state.queries,
-					action.payload,
+					action.payload.query,
 				],
+				[action.payload.type]: {
+					...state[action.payload.type],
+					loading: false,
+					error: null,
+				},
 			};
 
 		case Actions.SEARCH_SUCCESS:
 			return {
 				...state,
-				loading: false,
-				error: null,
 				[action.payload.type]: {
 					...state[action.payload.type],
-					...action.payload.data,
+					data: {
+						...state[action.payload.type].data,
+						...action.payload.data,
+					},
+					loading: false,
+					error: null,
 				},
 			};
 
 		case Actions.SEARCH_ERROR:
 			return {
 				...state,
-				loading: false,
-				error: action.payload,
+				[action.payload.type]: {
+					...state[action.payload.type],
+					loading: false,
+					error: action.payload.error,
+				},
 			};
 
 		default:

@@ -13,14 +13,32 @@ export default {
 		error: null,
 	},
 	search: {
-		loading: false,
-		error: null,
 		queries: [],
-		features: {},
-		skills: {},
-		proficiencies: {},
-		spells: {},
-		equipment: {},
+		features: {
+			loading: false,
+			error: null,
+			data: {},
+		},
+		skills: {
+			loading: false,
+			error: null,
+			data: {},
+		},
+		proficiencies: {
+			loading: false,
+			error: null,
+			data: {},
+		},
+		spells: {
+			loading: false,
+			error: null,
+			data: {},
+		},
+		equipment: {
+			loading: false,
+			error: null,
+			data: {},
+		},
 	},
 	new: {
 		loading: false,
