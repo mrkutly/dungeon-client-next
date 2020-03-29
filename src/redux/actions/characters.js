@@ -87,19 +87,51 @@ export const updateSuccess = () => ({
 	type: Actions.UPDATE_CHARACTER_SUCCESS,
 });
 
+const getParam = (type, data) => {
+	const numeric = [
+		'experience',
+		'maxHp',
+		'currentHp',
+		'gold',
+		'silver',
+		'copper',
+		'dexterity',
+		'strength',
+		'constitution',
+		'wisdom',
+		'intelligence',
+		'charisma',
+		'level',
+	];
+
+	if (numeric.includes(type)) {
+		return {
+			localParam: Number(data),
+			updateParam: Number(data),
+		};
+	}
+
+	if (type === 'equipment') {
+		return {
+			localParam: { quantity: 1, item: data },
+			updateParam: [{ quantity: 1, item: data._id }],
+		};
+	}
+
+	return {
+		updateParam: [data._id],
+		localParam: data,
+	};
+};
+
 export const update = ({ type, characterId, data }, controller) => async (dispatch, getState) => {
 	const { token } = getState().auth;
 	// the backend just needs an id, but locally we want the whole object.
-	let updateParam = data._id;
-	let localParam = data;
-	if (type === 'equipment') {
-		localParam = { quantity: 1, item: data };
-		updateParam = { quantity: 1, item: data._id };
-	}
+	const { updateParam, localParam } = getParam(type, data);
 
 	try {
 		dispatch(updateStarted({ type, characterId, data: localParam }));
-		const result = await put(`/characters/${characterId}`, { [type]: [updateParam] }, controller, token);
+		const result = await put(`/characters/${characterId}`, { [type]: updateParam }, controller, token);
 		if (result.error) throw new Error(result.error);
 		dispatch(updateSuccess());
 	} catch (error) {

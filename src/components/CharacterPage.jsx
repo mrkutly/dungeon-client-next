@@ -11,8 +11,8 @@ const CharacterPage = () => {
 	return (
 		<HomeLayout>
 			{(loading && !character?.detailsLoaded) && <h1>loading...</h1>}
-			{error && <h1>{error}</h1>}
 			{character?.detailsLoaded && <CharacterSheet character={character} />}
+			{error && <h1>{error}</h1>}
 		</HomeLayout>
 	);
 };

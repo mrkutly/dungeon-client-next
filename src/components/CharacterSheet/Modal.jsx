@@ -4,12 +4,18 @@ import Proficiency from './attribute-details/Proficiency';
 import Skill from './attribute-details/Skill';
 import Spell from './attribute-details/Spell';
 import Equipment from './attribute-details/Equipment';
+import Language from './attribute-details/Language';
+import Trait from './attribute-details/Trait';
+import Condition from './attribute-details/Condition';
 import {
 	FEATURES,
 	PROFICIENCIES,
 	SKILLS,
 	SPELLS,
 	EQUIPMENT,
+	CONDITIONS,
+	LANGUAGES,
+	TRAITS,
 } from '../../redux/attributeTypes';
 
 const Modal = ({
@@ -19,11 +25,14 @@ const Modal = ({
 		<div className="wrapper">
 			<button ref={closeBtnRef} type="button">&times;</button>
 			<div className="details">
+				{type === TRAITS && <Trait data={data} />}
 				{type === FEATURES && <Feature data={data} />}
 				{type === PROFICIENCIES && <Proficiency data={data} />}
 				{type === SKILLS && <Skill data={data} />}
 				{type === SPELLS && <Spell data={data} />}
 				{type === EQUIPMENT && <Equipment data={data} />}
+				{type === LANGUAGES && <Language data={data} />}
+				{type === CONDITIONS && <Condition data={data} />}
 			</div>
 		</div>
 	</ModalStyles>

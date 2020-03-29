@@ -64,7 +64,11 @@ export default function reducer(state = initialState.characters, action) {
 			const characters = state.data;
 			const { type, characterId, data } = action.payload;
 			const characterIdx = characters.findIndex((c) => c._id === characterId);
-			characters[characterIdx][type] = [...characters[characterIdx][type], data];
+			const updatedData = typeof characters[characterIdx][type] === 'object'
+				? [...characters[characterIdx][type], data]
+				: [data];
+
+			characters[characterIdx][type] = updatedData;
 
 			return {
 				...state,

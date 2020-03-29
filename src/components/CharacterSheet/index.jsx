@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import Header from './Header';
 import Stats from './Stats';
@@ -9,22 +10,45 @@ import {
 	SKILLS,
 	SPELLS,
 	EQUIPMENT,
+	LANGUAGES,
+	CONDITIONS,
+	TRAITS,
 } from '../../redux/attributeTypes';
 
-const CharacterSheet = ({ character }) => (
-	<>
-		<Header character={character} />
-		<SheetStyles>
-			<Stats character={character} />
-			<BasicInfo character={character} />
-			{character.features && <Section data={character.features} type={FEATURES} />}
-			{character.proficiencies && <Section data={character.proficiencies} type={PROFICIENCIES} />}
-			{character.skills && <Section data={character.skills} type={SKILLS} />}
-			{character.spells && <Section data={character.spells} type={SPELLS} />}
-			{character.equipment && <Section data={character.equipment} type={EQUIPMENT} />}
-		</SheetStyles>
-	</>
-);
+const CharacterSheet = ({ character }) => {
+	const [editMode, setEditMode] = useState(false);
+
+	return (
+		<>
+			<Header character={character} editMode={editMode} setEditMode={setEditMode} />
+			<SheetStyles>
+				<Stats
+					dexterity={character.dexterity}
+					strength={character.strength}
+					constitution={character.constitution}
+					wisdom={character.wisdom}
+					intelligence={character.intelligence}
+					charisma={character.charisma}
+					editMode={editMode}
+				/>
+				<BasicInfo
+					maxHp={character.maxHp}
+					currentHp={character.currentHp}
+					experience={character.experience}
+					editMode={editMode}
+				/>
+				<Section data={character.features} type={FEATURES} editMode={editMode} />
+				<Section data={character.proficiencies} type={PROFICIENCIES} editMode={editMode} />
+				<Section data={character.skills} type={SKILLS} editMode={editMode} />
+				<Section data={character.traits} type={TRAITS} editMode={editMode} />
+				<Section data={character.spells} type={SPELLS} editMode={editMode} />
+				<Section data={character.equipment} type={EQUIPMENT} editMode={editMode} />
+				<Section data={character.languages} type={LANGUAGES} editMode={editMode} />
+				<Section data={character.conditions} type={CONDITIONS} editMode={editMode} />
+			</SheetStyles>
+		</>
+	);
+};
 
 const SheetStyles = styled.div`
 	display: grid;

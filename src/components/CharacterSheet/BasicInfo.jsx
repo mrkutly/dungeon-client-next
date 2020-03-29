@@ -1,36 +1,70 @@
 import styled from 'styled-components';
-import joinIntoSentence from '../../lib/joinIntoSentence';
+import { useState } from 'react';
+// import { useDispatch } from 'react-redux';
 
-const BasicInfo = ({ character }) => {
-	const {
-		maxHp, currentHp, experience, languages, conditions,
-	} = character;
+const Display = ({ maxHp, currentHp, experience }) => (
+	<InfoStyles id="hp-and-experience">
+		<span>
+			HP {currentHp} / {maxHp}
+		</span>
+		<span>
+			EXP {experience}
+		</span>
+	</InfoStyles>
+);
 
-	const languageNames = languages && languages.length ? languages.map((l) => l.name) : null;
-	const conditionNames = conditions && conditions.length ? conditions.map((c) => c.name) : null;
+const Edit = ({ maxHp, currentHp, experience }) => {
+	// const dispatch = useDispatch();
+	const [data, setData] = useState({
+		currentHp,
+		maxHp,
+		experience,
+	});
+
+	const handleChange = (e) => setData({ ...data, [e.target.name]: e.target.value });
 
 	return (
 		<InfoStyles id="hp-and-experience">
 			<span>
-				HP {currentHp} / {maxHp}
+				HP
+				<input
+					type="number"
+					aria-label="current-hp"
+					name="currentHp"
+					value={data.currentHp}
+					onChange={handleChange}
+					size="3"
+				/>
+				/
+				<input
+					type="number"
+					aria-label="max-hp"
+					name="maxHp"
+					value={data.maxHp}
+					onChange={handleChange}
+					size={3}
+				/>
+
 			</span>
 			<span>
-				EXP {experience}
+				EXP
+				<input
+					type="number"
+					aria-label="experience"
+					name="experience"
+					value={data.experience}
+					onChange={handleChange}
+				/>
 			</span>
-
-			{languageNames && (
-				<div>
-					Speaks {joinIntoSentence(languageNames)}.
-				</div>
-			)}
-			{conditionNames && (
-				<div>
-					Currently {joinIntoSentence(conditionNames)}.
-				</div>
-			)}
-
 		</InfoStyles>
 	);
+};
+
+const BasicInfo = ({
+	maxHp, currentHp, experience, editMode,
+}) => {
+	if (!editMode) return <Display maxHp={maxHp} currentHp={currentHp} experience={experience} />;
+	return <Edit maxHp={maxHp} currentHp={currentHp} experience={experience} />;
 };
 
 const InfoStyles = styled.section`
@@ -44,6 +78,11 @@ const InfoStyles = styled.section`
 
 	div {
 		margin-top: calc(var(--one-space) * 3);
+	}
+
+	input {
+		max-width: 7rem;
+		margin-right: var(--one-space);
 	}
 `;
 

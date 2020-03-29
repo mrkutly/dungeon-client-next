@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Stats = ({ character }) => {
+const Stats = (props) => {
 	const {
 		dexterity,
 		strength,
@@ -8,7 +8,7 @@ const Stats = ({ character }) => {
 		wisdom,
 		intelligence,
 		charisma,
-	} = character;
+	} = props;
 
 	return (
 		<StatsStyles id="stats">

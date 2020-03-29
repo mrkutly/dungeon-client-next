@@ -158,29 +158,13 @@ a:hover {
 	border-bottom-color: var(--highlight);
 }
 
-section#equipment h2, 
-section#skills h2, 
-section#proficiencies h2, 
-section#features h2, 
-section#spells h2 {
-	margin: 0;
+section.attribute-section h2 {
+	margin-top: 0;
 }
 
-section#equipment h2, 
-section#skills h2, 
-section#proficiencies h2, 
-section#features h2, 
-section#spells h2,
-section#equipment h3, 
-section#skills h3, 
-section#proficiencies h3, 
-section#features h3, 
-section#spells h3,
-section#equipment h4, 
-section#skills h4, 
-section#proficiencies h4, 
-section#features h4, 
-section#spells h4 {
+section.attribute-section h2, 
+section.attribute-section  h3, 
+section.attribute-section  h4 {
 	padding-bottom: var(--one-width);
 	width: max-content;
 	border-bottom: var(--one-width) solid var(--highlight-2);

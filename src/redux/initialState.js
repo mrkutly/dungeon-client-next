@@ -44,6 +44,24 @@ export default {
 			data: [],
 			cache: {},
 		},
+		languages: {
+			loading: false,
+			error: null,
+			data: [],
+			cache: {},
+		},
+		conditions: {
+			loading: false,
+			error: null,
+			data: [],
+			cache: {},
+		},
+		traits: {
+			loading: false,
+			error: null,
+			data: [],
+			cache: {},
+		},
 	},
 	new: {
 		loading: false,
