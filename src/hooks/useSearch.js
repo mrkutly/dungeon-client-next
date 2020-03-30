@@ -13,12 +13,19 @@ const useSearch = (type, query) => {
 	const sanitizedQuery = sanitize(query);
 	let data = [];
 
+	// check the redux cache of query results
 	if (cache[sanitizedQuery] && dataFetched) {
 		data = cache[sanitizedQuery];
+
+		// if we did not find a cached query, filter them and cache the result
 	} else if (dataFetched && sanitizedQuery?.length > 0) {
 		const matcher = new RegExp(sanitizedQuery, 'i');
 		data = unfiltered.filter((d) => matcher.test(sanitize(d.name)));
 		dispatch(cacheResult({ type, query: sanitizedQuery, result: data }));
+
+		// otherwise (the query is empty), just send all the data
+	} else {
+		data = unfiltered;
 	}
 
 	useEffect(() => {

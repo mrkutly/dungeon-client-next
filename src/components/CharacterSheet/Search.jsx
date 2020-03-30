@@ -19,6 +19,7 @@ const Search = ({ type }) => {
 		const controller = new AbortController();
 		dispatch(update({ type, characterId, data: selected }, controller));
 	};
+	console.log(data);
 
 	return (
 		<SearchSyles>
@@ -38,7 +39,7 @@ const Search = ({ type }) => {
 				style={{ maxHeight: '10vh' }}
 			>
 				{
-					data.slice(0, 5).map((d) => (
+					data.slice(0, 7).map((d) => (
 						<option
 							key={d._id}
 							value={d.name}
