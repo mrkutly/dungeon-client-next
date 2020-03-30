@@ -15,6 +15,7 @@ const Search = ({ type }) => {
 
 	const add = () => {
 		const selected = data.find((d) => d.name === query);
+		if (!selected) return;
 		const controller = new AbortController();
 		dispatch(update({ type, characterId, data: selected }, controller));
 	};
