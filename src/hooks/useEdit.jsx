@@ -45,6 +45,14 @@ export const Provider = ({ character, children }) => {
 		});
 	};
 
+	const levelDown = () => {
+		if (edits.level === 1) return;
+		setEdits({
+			...edits,
+			level: edits.level - 1,
+		});
+	};
+
 	const handleEdit = (e) => {
 		const isValid = validate(e.target);
 		if (!isValid) return;
@@ -61,6 +69,7 @@ export const Provider = ({ character, children }) => {
 				edits,
 				handleEdit,
 				levelUp,
+				levelDown,
 			}
 		}
 		>{children}

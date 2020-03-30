@@ -9,7 +9,7 @@ const Heading = ({ character, editMode, setEditMode }) => {
 	const { level } = character;
 	const race = character.race.name;
 	const characterClass = character.characterClass.name;
-	const { edits, levelUp } = useEdit();
+	const { edits, levelUp, levelDown } = useEdit();
 	const dispatch = useDispatch();
 
 	const save = () => {
@@ -29,7 +29,25 @@ const Heading = ({ character, editMode, setEditMode }) => {
 				<h2>
 					Level
 					{' '}
+					{editMode && (
+						<button
+							type="button"
+							onClick={levelDown}
+							disabled={edits.level === 1}
+							className="level-btn"
+						><span role="img" aria-label="finger pointing down">👇</span>
+						</button>
+					)}
 					{editMode ? edits.level : level}
+					{editMode && (
+						<button
+							type="button"
+							onClick={levelUp}
+							disabled={edits.level === 20}
+							className="level-btn"
+						><span role="img" aria-label="finger pointing up">👆</span>
+						</button>
+					)}
 					{' '}
 					{race}
 					{' '}
@@ -37,7 +55,6 @@ const Heading = ({ character, editMode, setEditMode }) => {
 				</h2>
 			</span>
 			<div>
-				{editMode && <button type="button" onClick={levelUp}>Level Up</button>}
 				<button type="button" onClick={handleClick}>{editMode ? 'Done' : 'Edit'}</button>
 			</div>
 		</HeadingStyles>
@@ -49,6 +66,12 @@ const HeadingStyles = styled.header`
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: baseline;
+
+	button.level-btn {
+		border: none;
+		margin: 0.25rem var(--one-space);
+	}
+
 
 	button {
 		margin-left: var(--one-space);
