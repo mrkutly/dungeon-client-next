@@ -14,8 +14,9 @@ const Search = ({ type }) => {
 	const characterId = Router.query.id;
 
 	const add = () => {
+		const selected = data.find((d) => d.name === query);
 		const controller = new AbortController();
-		dispatch(update({ type, characterId, data: data[0] }, controller));
+		dispatch(update({ type, characterId, data: selected }, controller));
 	};
 
 	return (
@@ -36,7 +37,13 @@ const Search = ({ type }) => {
 				style={{ maxHeight: '10vh' }}
 			>
 				{
-					data.slice(0, 5).map((d) => <option key={d._id}>{d.name}</option>)
+					data.slice(0, 5).map((d) => (
+						<option
+							key={d._id}
+							value={d.name}
+						>{d.name}
+						</option>
+					))
 				}
 			</datalist>
 			<div className="message">
