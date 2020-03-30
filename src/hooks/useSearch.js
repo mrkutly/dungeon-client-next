@@ -29,13 +29,11 @@ const useSearch = (type, query) => {
 	}
 
 	useEffect(() => {
-		if (!(query?.length > 0) || dataFetched) return;
-
 		const controller = new AbortController();
 		dispatch(loadData(type, controller));
 
 		return () => controller.abort();
-	}, [query]);
+	}, []);
 
 	return { data, error, loading };
 };
