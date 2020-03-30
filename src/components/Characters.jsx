@@ -29,6 +29,7 @@ const CharacterListStyles = styled.ul`
 	justify-content: space-evenly;
 	padding-left: 0;
 	max-width: calc(var(--one-space) * 100);
+	min-height: calc(70vh - var(--one-space) - var(--one-space));
 
 	li {
 		display: inline-block;
