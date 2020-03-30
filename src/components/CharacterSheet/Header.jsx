@@ -4,11 +4,12 @@ import Router from 'next/router';
 import useEdit from '../../hooks/useEdit';
 import { updateStats } from '../../redux/actions/characters';
 
+
 const Heading = ({ character, editMode, setEditMode }) => {
 	const { level } = character;
 	const race = character.race.name;
 	const characterClass = character.characterClass.name;
-	const { edits } = useEdit();
+	const { edits, levelUp } = useEdit();
 	const dispatch = useDispatch();
 
 	const save = () => {
@@ -19,7 +20,6 @@ const Heading = ({ character, editMode, setEditMode }) => {
 
 	const handleClick = editMode ? save : () => setEditMode(true);
 
-
 	return (
 		<HeadingStyles>
 			<span>
@@ -29,14 +29,17 @@ const Heading = ({ character, editMode, setEditMode }) => {
 				<h2>
 					Level
 					{' '}
-					{level}
+					{editMode ? edits.level : level}
 					{' '}
 					{race}
 					{' '}
 					{characterClass}
 				</h2>
 			</span>
-			<button type="button" onClick={handleClick}>{editMode ? 'Done' : 'Edit'}</button>
+			<div>
+				{editMode && <button type="button" onClick={levelUp}>Level Up</button>}
+				<button type="button" onClick={handleClick}>{editMode ? 'Done' : 'Edit'}</button>
+			</div>
 		</HeadingStyles>
 	);
 };
@@ -46,6 +49,10 @@ const HeadingStyles = styled.header`
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: baseline;
+
+	button {
+		margin-left: var(--one-space);
+	}
 	
 	h1, h2 {
 		display: inline-block;

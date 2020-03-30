@@ -4,6 +4,7 @@ export const EditContext = createContext();
 
 export const Provider = ({ character, children }) => {
 	const [edits, setEdits] = useState({
+		level: character.level,
 		dexterity: character.dexterity,
 		strength: character.strength,
 		constitution: character.constitution,
@@ -19,6 +20,7 @@ export const Provider = ({ character, children }) => {
 	});
 
 	const limited = [
+		'level',
 		'dexterity',
 		'strength',
 		'constitution',
@@ -33,6 +35,14 @@ export const Provider = ({ character, children }) => {
 		if (limited.includes(name) && value > 20) return false;
 		if (name === 'currentHp' && value > edits.maxHp) return false;
 		return true;
+	};
+
+	const levelUp = () => {
+		if (edits.level === 20) return;
+		setEdits({
+			...edits,
+			level: edits.level + 1,
+		});
 	};
 
 	const handleEdit = (e) => {
@@ -50,6 +60,7 @@ export const Provider = ({ character, children }) => {
 			{
 				edits,
 				handleEdit,
+				levelUp,
 			}
 		}
 		>{children}
