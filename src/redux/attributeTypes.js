@@ -1,4 +1,5 @@
 export const FEATURES = 'features';
+export const FEATS = 'feats';
 export const PROFICIENCIES = 'proficiencies';
 export const SKILLS = 'skills';
 export const SPELLS = 'spells';
@@ -16,4 +17,5 @@ export default {
 	LANGUAGES,
 	CONDITIONS,
 	TRAITS,
+	FEATS,
 };

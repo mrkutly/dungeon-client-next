@@ -27,7 +27,7 @@ const Search = ({ type }) => {
 				<input
 					type="text"
 					aria-label="search"
-					placeholder={`Search to add ${type}`}
+					placeholder="Search"
 					onChange={(e) => debouncedSetQuery(e.target.value)}
 					list={`${type}-list`}
 				/>

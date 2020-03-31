@@ -14,6 +14,12 @@ export default {
 		error: null,
 	},
 	search: {
+		feats: {
+			loading: false,
+			error: null,
+			data: [],
+			cache: {},
+		},
 		features: {
 			loading: false,
 			error: null,

@@ -14,6 +14,7 @@ import {
 	LANGUAGES,
 	CONDITIONS,
 	TRAITS,
+	FEATS,
 } from '../../redux/attributeTypes';
 
 const CharacterSheet = ({ character }) => {
@@ -42,6 +43,7 @@ const CharacterSheet = ({ character }) => {
 						copper={character.copper}
 						editMode={editMode}
 					/>
+					<Section data={character.feats} type={FEATS} editMode={editMode} />
 					<Section data={character.features} type={FEATURES} editMode={editMode} />
 					<Section data={character.proficiencies} type={PROFICIENCIES} editMode={editMode} />
 					<Section data={character.skills} type={SKILLS} editMode={editMode} />

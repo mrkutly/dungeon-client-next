@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Feature from './attribute-details/Feature';
+import Feat from './attribute-details/Feat';
 import Proficiency from './attribute-details/Proficiency';
 import Skill from './attribute-details/Skill';
 import Spell from './attribute-details/Spell';
@@ -17,6 +18,7 @@ import {
 	CONDITIONS,
 	LANGUAGES,
 	TRAITS,
+	FEATS,
 } from '../../redux/attributeTypes';
 
 const Modal = ({
@@ -27,6 +29,7 @@ const Modal = ({
 			<button ref={closeBtnRef} className="close" type="button">&times;</button>
 			<div className="details">
 				{type === TRAITS && <Trait data={data} />}
+				{type === FEATS && <Feat data={data} />}
 				{type === FEATURES && <Feature data={data} />}
 				{type === PROFICIENCIES && <Proficiency data={data} />}
 				{type === SKILLS && <Skill data={data} />}
