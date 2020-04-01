@@ -127,7 +127,7 @@ export const update = ({ type, characterId, data }, controller) => async (dispat
 		const { auth, characters } = getState();
 		const attrs = characters.data[characterId][type];
 
-		// we different shapes of data for equipment and other attributes
+		// we need different shapes of data for equipment and other attributes
 		const { updateParam, localParam } = getParam(type, data, attrs);
 
 		dispatch(updateStarted({ type, characterId, data: localParam }));
