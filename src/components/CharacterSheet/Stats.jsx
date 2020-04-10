@@ -1,96 +1,48 @@
 /* eslint-disable react/destructuring-assignment */
 import styled from 'styled-components';
 import useEdit from '../../hooks/useEdit';
+import { mobileBreakpoint } from '../styleConfig';
+
+const stats = [
+	{ displayName: 'CON', name: 'constitution' },
+	{ displayName: 'STR', name: 'strength' },
+	{ displayName: 'DEX', name: 'dexterity' },
+	{ displayName: 'WIS', name: 'wisdom' },
+	{ displayName: 'INT', name: 'intelligence' },
+	{ displayName: 'CHA', name: 'charisma' },
+];
 
 const Edit = () => {
 	const { edits, handleEdit } = useEdit();
 	return (
 		<StatsStyles id="stats">
-			<div>CON</div>
-			<input
-				type="number"
-				aria-label="constitution"
-				name="constitution"
-				value={edits.constitution}
-				onChange={handleEdit}
-			/>
-
-			<div>STR</div>
-			<input
-				type="number"
-				aria-label="strength"
-				name="strength"
-				value={edits.strength}
-				onChange={handleEdit}
-			/>
-
-			<div>DEX</div>
-			<input
-				type="number"
-				aria-label="dexterity"
-				name="dexterity"
-				value={edits.dexterity}
-				onChange={handleEdit}
-			/>
-
-			<div>WIS</div>
-			<input
-				type="number"
-				aria-label="wisdom"
-				name="wisdom"
-				value={edits.wisdom}
-				onChange={handleEdit}
-			/>
-
-			<div>INT</div>
-			<input
-				type="number"
-				aria-label="intelligence"
-				name="intelligence"
-				value={edits.intelligence}
-				onChange={handleEdit}
-			/>
-
-			<div>CHA</div>
-			<input
-				type="number"
-				aria-label="charisma"
-				name="charisma"
-				value={edits.charisma}
-				onChange={handleEdit}
-			/>
-
+			{stats.map((stat) => (
+				<>
+					<div>{stat.displayName}</div>
+					<input
+						type="number"
+						pattern="[0-9]*"
+						aria-label={stat.name}
+						name={stat.name}
+						value={edits[stat.name]}
+						onChange={handleEdit}
+					/>
+				</>
+			))}
 		</StatsStyles>
 	);
 };
 
-const Display = (props) => {
-	const {
-		dexterity,
-		strength,
-		constitution,
-		wisdom,
-		intelligence,
-		charisma,
-	} = props;
-
-	return (
-		<StatsStyles id="stats">
-			<div>CON</div>
-			<div aria-label="consitution">{constitution}</div>
-			<div>STR</div>
-			<div aria-label="strength">{strength}</div>
-			<div>DEX</div>
-			<div aria-label="dexterity">{dexterity}</div>
-			<div>WIS</div>
-			<div aria-label="wisdom">{wisdom}</div>
-			<div>INT</div>
-			<div aria-label="intelligence">{intelligence}</div>
-			<div>CHA</div>
-			<div aria-label="charisma">{charisma}</div>
-		</StatsStyles>
-	);
-};
+const Display = (props) => (
+	<StatsStyles id="stats">
+		{stats.map((stat) => (
+			<>
+				<div>{stat.displayName}</div>
+				<div aria-label={stat.name}>{props[stat.name]}</div>
+			</>
+		))}
+	</StatsStyles>
+);
 
 const Stats = (props) => {
 	if (!props.editMode) return <Display {...props} />;
@@ -115,6 +67,12 @@ const StatsStyles = styled.section`
 		line-height: 2.1rem;
 		margin: 0;
 		font-size: 1.5rem;
+	}
+
+	@media (${mobileBreakpoint}) {
+		max-width: 10rem;
+		grid-template-columns: 50% 50%;
+		margin: var(--one-space) 0;
 	}
 `;
 

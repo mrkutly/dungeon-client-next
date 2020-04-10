@@ -1,3 +1,6 @@
+// Mobile
+export const SET_MOBILE_TRUE = 'SET_MOBILE_TRUE';
+
 // Auth types
 export const SIGNOUT = 'SIGNOUT';
 export const SIGNIN_STARTED = 'SIGNIN_STARTED';

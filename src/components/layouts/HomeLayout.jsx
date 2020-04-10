@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { signout } from '../../redux/actions/auth';
@@ -22,6 +23,7 @@ const HomeLayout = ({ children }) => {
 				>Go Back
 				</a>
 				<a href="/" onClick={handleSignout}>Sign Out</a>
+				<Link href="/characters/new"><a>New Character</a></Link>
 			</nav>
 
 			{children}
@@ -36,7 +38,7 @@ const HomeStyles = styled.main`
 	nav{
 		display: block;
 		a {
-		margin-right: var(--one-space);
+		margin-right: calc(var(--one-space) * 3);
 	}}
 `;
 

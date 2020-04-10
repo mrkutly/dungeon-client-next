@@ -1,6 +1,5 @@
 import PleaseSignIn from '../../components/PleaseSignIn';
 import UserHome from '../../components/UserHome';
-import withRedux from '../../redux/withRedux';
 
 const HomePage = () => (
 	<PleaseSignIn>
@@ -8,4 +7,4 @@ const HomePage = () => (
 	</PleaseSignIn>
 );
 
-export default withRedux(HomePage);
+export default HomePage;

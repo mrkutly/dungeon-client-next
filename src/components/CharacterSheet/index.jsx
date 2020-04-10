@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { Provider } from '../../hooks/useEdit';
+import { mobileBreakpoint } from '../styleConfig';
 import Header from './Header';
 import Stats from './Stats';
 import BasicInfo from './BasicInfo';
@@ -63,6 +64,10 @@ const SheetStyles = styled.div`
 	grid-template-columns: 8rem auto auto;
 	grid-template-rows: repeat(10, auto);
 	grid-gap: calc(var(--one-space) * 4);
+
+	@media (${mobileBreakpoint}) {
+		display: block;
+	}
 `;
 
 export default CharacterSheet;

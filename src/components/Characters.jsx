@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import CharacterCard from './CharacterCard';
 
@@ -15,7 +14,6 @@ const Characters = () => {
 			<CharacterListStyles>
 				{characters.map((c) => <li key={c._id}><CharacterCard character={c} /></li>)}
 			</CharacterListStyles>
-			<Link href="/characters/new"><a>Make a new character</a></Link>
 		</div>
 	);
 };

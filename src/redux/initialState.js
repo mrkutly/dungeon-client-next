@@ -1,4 +1,5 @@
 export default {
+	isMobile: false,
 	auth: {
 		token: null,
 		loading: false,

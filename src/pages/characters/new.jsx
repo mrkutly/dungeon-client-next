@@ -1,6 +1,5 @@
 import PleaseSignIn from '../../components/PleaseSignIn';
 import NewCharacter from '../../components/NewCharacter';
-import withRedux from '../../redux/withRedux';
 
 const NewCharPage = () => (
 	<PleaseSignIn>
@@ -8,4 +7,4 @@ const NewCharPage = () => (
 	</PleaseSignIn>
 );
 
-export default withRedux(NewCharPage);
+export default NewCharPage;

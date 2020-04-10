@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import Router from 'next/router';
 import useEdit from '../../hooks/useEdit';
 import { updateStats } from '../../redux/actions/characters';
+import { mobileBreakpoint } from '../styleConfig';
 
 
 const Heading = ({ character, editMode, setEditMode }) => {
@@ -72,7 +73,6 @@ const HeadingStyles = styled.header`
 		margin: 0.25rem var(--one-space);
 	}
 
-
 	button {
 		margin-left: var(--one-space);
 	}
@@ -80,6 +80,10 @@ const HeadingStyles = styled.header`
 	h1, h2 {
 		display: inline-block;
 		margin-right: calc(var(--one-space) * 2);
+	}
+
+	@media (${mobileBreakpoint}) {
+		display: block;
 	}
 `;
 

@@ -4,8 +4,10 @@ import authReducer from './auth';
 import charactersReducer from './characters';
 import searchReducer from './search';
 import newReducer from './new';
+import mobileReducer from './mobile';
 
 const sliceReducer = combineReducers({
+	isMobile: mobileReducer,
 	auth: authReducer,
 	characters: charactersReducer,
 	search: searchReducer,

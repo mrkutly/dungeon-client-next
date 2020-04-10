@@ -1,6 +1,6 @@
 /* eslint-disable react/destructuring-assignment */
 import styled from 'styled-components';
-import { useState } from 'react';
+import { mobileBreakpoint } from '../styleConfig';
 import useEdit from '../../hooks/useEdit';
 
 const Display = ({
@@ -112,6 +112,15 @@ const InfoStyles = styled.section`
 	input {
 		max-width: 7rem;
 		margin-right: var(--one-space);
+	}
+
+	@media (${mobileBreakpoint}) {
+		div {
+			display: block;
+			margin: var(--one-space) 0;
+		}
+		border-bottom: var(--one-width) solid var(--highlight-2);
+		margin: calc(var(--one-space) * 5) 0;
 	}
 `;
 

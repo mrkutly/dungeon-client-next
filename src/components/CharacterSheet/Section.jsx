@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import Attribute from './Attribute';
 import Search from './Search';
+import { mobileBreakpoint } from '../styleConfig';
 
 const Section = ({ type, data, editMode }) => {
 	const title = type[0].toUpperCase() + type.slice(1);
 
 	return (
-		<section id={type} className="attribute-section">
+		<SectionStyles id={type} className="attribute-section">
 			<h2>{title}</h2>
 			{editMode && <Search type={type} />}
 			<ListStyles>
@@ -14,7 +15,7 @@ const Section = ({ type, data, editMode }) => {
 					<Attribute key={`${type}-${f._id}`} type={type} value={f} />
 				))}
 			</ListStyles>
-		</section>
+		</SectionStyles>
 	);
 };
 
@@ -23,6 +24,12 @@ const ListStyles = styled.ul`
 	padding-left: 0;
 	font-size: 1.1rem;
 	margin-top: 0;
+`;
+
+const SectionStyles = styled.section`
+	@media (${mobileBreakpoint}) {
+		margin: calc(var(--one-space) * 5) 0;
+	}
 `;
 
 export default Section;

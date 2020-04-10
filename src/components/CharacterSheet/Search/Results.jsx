@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useEffect, useRef } from 'react';
+import { mobileBreakpoint } from '../../styleConfig';
 
 const Results = ({
 	data, error, loading, add, close, inputRef,
@@ -59,30 +60,35 @@ const Results = ({
 };
 
 const ResultsStyles = styled.div`
-    padding: 5px 10px;
-		border-radius: 5px;
-		background: white; 
-		z-index: 1;
-		border: var(--one-width) solid var(--highlight);
-    position: absolute;
-		width: calc(var(--one-space) * 20);
-		max-height: calc(var(--one-space) * 20);
-		overflow: scroll;
-		
-		div {
-			transition: var(--transition);
-			cursor: pointer;
-			border-bottom: 1px solid var(--accent);
-			padding: 5px 0;
+	padding: 5px 10px;
+	border-radius: 5px;
+	background: white; 
+	z-index: 1;
+	border: var(--one-width) solid var(--highlight);
+	position: absolute;
+	width: calc(var(--one-space) * 20);
+	max-height: calc(var(--one-space) * 20);
+	overflow: scroll;
+	
+	div {
+		transition: var(--transition);
+		cursor: pointer;
+		border-bottom: 1px solid var(--accent);
+		padding: 5px 0;
 
-			&:hover, &:focus {
-				color: var(--accent);
-			}
-
-			&:last-of-type {
-				border-bottom: none;
-			}
+		&:hover, &:focus {
+			color: var(--accent);
 		}
+
+		&:last-of-type {
+			border-bottom: none;
+		}
+	}
+
+	@media (${mobileBreakpoint}) {
+		font-size: 1.4rem;
+		width: calc(100vw - 52px);
+	}
 `;
 
 export default Results;

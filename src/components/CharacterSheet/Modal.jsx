@@ -20,6 +20,7 @@ import {
 	TRAITS,
 	FEATS,
 } from '../../redux/attributeTypes';
+import { mobileBreakpoint } from '../styleConfig';
 
 const Modal = ({
 	type, outerRef, closeBtnRef, data,
@@ -68,9 +69,27 @@ const ModalStyles = styled.div`
 		background-color: white;
 		max-width: 90vw;
 		max-height: 90vh;
-		min-width: 30rem;
+		min-width: 40vw;
 		overflow: scroll;
 		border: var(--one-width) solid var(--highlight);
+	}
+
+
+	@media (${mobileBreakpoint}) {
+		.wrapper {
+			max-width: calc(100vw - 8px);
+			max-height: calc(100vh - 8px);
+			width: calc(100vw - 8px);
+			height: calc(100vh - 8px);
+		}
+
+		.details {
+			max-width: calc(100vw - 8px);
+
+			h2 {
+				width: auto;
+			}
+		}
 	}
 `;
 
