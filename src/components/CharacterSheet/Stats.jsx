@@ -1,4 +1,5 @@
 /* eslint-disable react/destructuring-assignment */
+import React from 'react';
 import styled from 'styled-components';
 import useEdit from '../../hooks/useEdit';
 import { mobileBreakpoint } from '../styleConfig';
@@ -17,7 +18,7 @@ const Edit = () => {
 	return (
 		<StatsStyles id="stats">
 			{stats.map((stat) => (
-				<>
+				<React.Fragment key={stat.displayName}>
 					<div>{stat.displayName}</div>
 					<input
 						type="number"
@@ -27,7 +28,7 @@ const Edit = () => {
 						value={edits[stat.name]}
 						onChange={handleEdit}
 					/>
-				</>
+				</React.Fragment>
 			))}
 		</StatsStyles>
 	);
@@ -36,10 +37,10 @@ const Edit = () => {
 const Display = (props) => (
 	<StatsStyles id="stats">
 		{stats.map((stat) => (
-			<>
+			<React.Fragment key={stat.name}>
 				<div>{stat.displayName}</div>
 				<div aria-label={stat.name}>{props[stat.name]}</div>
-			</>
+			</React.Fragment>
 		))}
 	</StatsStyles>
 );

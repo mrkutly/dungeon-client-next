@@ -1,5 +1,5 @@
 const RaceSelect = ({ races, handleChange, selected }) => (
-	<fieldset>
+	<fieldset id="races-fieldset">
 		<legend>Race</legend>
 		<div className="radio-buttons">
 			{races.map((r) => (

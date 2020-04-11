@@ -34,6 +34,7 @@ const Heading = ({ character, editMode, setEditMode }) => {
 						<button
 							type="button"
 							onClick={levelDown}
+							aria-label="level down"
 							disabled={edits.level === 1}
 							className="level-btn"
 						><span role="img" aria-label="finger pointing down">👇</span>
@@ -44,6 +45,7 @@ const Heading = ({ character, editMode, setEditMode }) => {
 						<button
 							type="button"
 							onClick={levelUp}
+							aria-label="level up"
 							disabled={edits.level === 20}
 							className="level-btn"
 						><span role="img" aria-label="finger pointing up">👆</span>

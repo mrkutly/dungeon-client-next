@@ -1,5 +1,5 @@
 const AttributesSelect = ({ attributes, handleChange, formData }) => (
-	<fieldset>
+	<fieldset id="attributes-fieldset">
 		<legend>Attributes</legend>
 		{attributes.map((attr) => (
 			<label htmlFor={attr} key={attr}>

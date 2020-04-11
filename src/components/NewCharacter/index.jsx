@@ -54,12 +54,14 @@ const NewCharacter = () => {
 					<button type="submit">Create</button>
 				</FormStyles>
 			)}
+			{error && (
+				<h2 id="error">
+					{error}
+				</h2>
+			)}
 			<Link href="/">
 				<a>Go Back</a>
 			</Link>
-			<h2>
-				{error}
-			</h2>
 		</HomeLayout>
 	);
 };
