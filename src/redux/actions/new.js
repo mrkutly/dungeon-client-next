@@ -1,44 +1,7 @@
 import Router from 'next/router';
 import * as Actions from '../actionTypes';
-import { get, post } from '../../lib/fetches';
+import { post } from '../../lib/fetches';
 import { addCharacter } from './characters';
-
-/**
- * NEW CHARACTER OPTIONS ACTIONS
- */
-
-export const optionsLoadStarted = () => ({
-	type: Actions.OPTIONS_LOAD_STARTED,
-});
-
-export const optionsLoadError = (error) => ({
-	type: Actions.OPTIONS_LOAD_ERROR,
-	payload: error.message,
-});
-
-export const optionsLoadSuccess = ({ races, classes }) => ({
-	type: Actions.OPTIONS_LOAD_SUCCESS,
-	payload: { races, classes },
-});
-
-export const loadOptions = (controllerOne, controllerTwo) => async (dispatch) => {
-	try {
-		dispatch(optionsLoadStarted());
-		const raceResult = await get('/races', null, controllerOne);
-		const classResult = await get('/classes', null, controllerTwo);
-		if (raceResult.error || classResult.error) {
-			const message = `Errors: ${raceResult.error} \n ${classResult.error}`;
-			throw new Error(message);
-		}
-		const sort = (arr) => arr.sort((a, b) => (a.name < b.name ? -1 : 0));
-		dispatch(optionsLoadSuccess({ races: sort(raceResult.data), classes: sort(classResult.data) }));
-	} catch (error) {
-		const aborted = controllerOne.signal.aborted || controllerTwo.signal.aborted;
-		if (!aborted) {
-			dispatch(optionsLoadError(error));
-		}
-	}
-};
 
 /*
 	CHARACTER FORM ACTIONS

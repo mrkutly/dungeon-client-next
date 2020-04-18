@@ -18,7 +18,7 @@ const useCharacters = () => {
 		return () => controller.abort();
 	}, []);
 
-	return { data, error };
+	return { data, error, fetched };
 };
 
 export default useCharacters;

@@ -5,19 +5,19 @@ import { getCharacterDetails } from '../redux/actions/characters';
 
 const useCharacter = (id) => {
 	const controller = new AbortController();
-	const { data, error } = useCharacters();
+	const { data, error, fetched } = useCharacters();
 	const loading = useSelector((s) => s.characters.loading);
 	const token = useSelector((s) => s.auth.token);
 	const dispatch = useDispatch();
 	const character = data?.[id];
 
 	useEffect(() => {
-		if (character && !character.detailsLoaded) {
+		if (fetched && !character.detailsLoaded) {
 			dispatch(getCharacterDetails(character, token, controller));
 		}
 
 		return () => controller.abort();
-	}, [character]);
+	}, [fetched]);
 
 	return { character, error, loading };
 };

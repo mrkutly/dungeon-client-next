@@ -12,16 +12,20 @@ const HomeLayout = ({ children }) => {
 		dispatch(signout());
 	};
 
+	const getPrev = () => {
+		if (router.pathname === '/characters') return '/';
+		return '/characters';
+	};
+
 	return (
 		<HomeStyles>
 			<nav>
-				<a
-					tabIndex="0"
-					role="link"
-					onKeyPress={(e) => e.key === 'Enter' && router.back()}
-					onClick={() => router.back()}
-				>Go Back
-				</a>
+				{ router.pathname !== '/' && (
+					<Link
+						href={getPrev()}
+					><a>Go Back</a>
+					</Link>
+				)				}
 				<a href="/" onClick={handleSignout}>Sign Out</a>
 				<Link href="/characters/new"><a>New Character</a></Link>
 			</nav>

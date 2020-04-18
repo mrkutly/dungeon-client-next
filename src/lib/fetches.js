@@ -1,3 +1,5 @@
+import fetch from 'isomorphic-unfetch';
+
 const baseUrl = process.env.NODE_ENV === 'development'
 	? 'http://localhost:8888'
 	: 'https://dungeon-api-express.herokuapp.com';
@@ -7,8 +9,14 @@ const headers = {
 	'Content-Type': 'application/json',
 };
 
-export const post = async (endpoint, data, controller = new AbortController(), token) => {
+export const post = async (endpoint, data, controller, token) => {
 	const url = baseUrl + endpoint;
+	const opts = {};
+
+	if (controller || typeof AbortController !== 'undefined') {
+		opts.signal = controller.signal || new AbortController().signal;
+	}
+
 	const response = await fetch(url, {
 		method: 'POST',
 		headers: {
@@ -16,13 +24,19 @@ export const post = async (endpoint, data, controller = new AbortController(), t
 			Authorization: token,
 		},
 		body: JSON.stringify(data),
-		signal: controller.signal,
+		...opts,
 	});
 	return response.json();
 };
 
-export const put = async (endpoint, data, controller = new AbortController(), token) => {
+export const put = async (endpoint, data, controller, token) => {
 	const url = baseUrl + endpoint;
+	const opts = {};
+
+	if (controller || typeof AbortController !== 'undefined') {
+		opts.signal = controller.signal || new AbortController().signal;
+	}
+
 	const response = await fetch(url, {
 		method: 'PUT',
 		headers: {
@@ -30,33 +44,44 @@ export const put = async (endpoint, data, controller = new AbortController(), to
 			Authorization: token,
 		},
 		body: JSON.stringify(data),
-		signal: controller.signal,
+		...opts,
 	});
 	return response.json();
 };
 
-export const del = async (endpoint, controller = new AbortController(), token) => {
+export const del = async (endpoint, controller, token) => {
 	const url = baseUrl + endpoint;
+	const opts = {};
+
+	if (controller || typeof AbortController !== 'undefined') {
+		opts.signal = controller.signal || new AbortController().signal;
+	}
+
 	const response = await fetch(url, {
 		method: 'DELETE',
 		headers: {
 			...headers,
 			Authorization: token,
 		},
-		signal: controller.signal,
+		...opts,
 	});
 	return response.json();
 };
 
-export const get = async (endpoint, token = '', controller = new AbortController()) => {
+export const get = async (endpoint, token = '', controller) => {
 	const url = baseUrl + endpoint;
+	const opts = {};
+
+	if (controller || typeof AbortController !== 'undefined') {
+		opts.signal = controller.signal || new AbortController().signal;
+	}
 	const response = await fetch(url, {
 		method: 'GET',
 		headers: {
 			...headers,
 			authorization: token,
 		},
-		signal: controller.signal,
+		...opts,
 	});
 	return response.json();
 };

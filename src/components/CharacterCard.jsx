@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import Link from 'next/link';
 
 const CharacterCard = ({ character }) => {
@@ -9,8 +8,8 @@ const CharacterCard = ({ character }) => {
 	const characterClass = character.characterClass.name;
 
 	return (
-		<Link href={`/characters/${_id}`}>
-			<CardStyles>
+		<Link href="/characters/[id]" as={`/characters/${_id}`}>
+			<a>
 				<h2>
 					{name}
 				</h2>
@@ -23,17 +22,9 @@ const CharacterCard = ({ character }) => {
 					{' '}
 					{characterClass}
 				</span>
-			</CardStyles>
+			</a>
 		</Link>
 	);
 };
 
-const CardStyles = styled.a`
-	display: block;
-	margin: calc(var(--one-space) * 5) 0;
-	
-	span {
-		margin-left: calc(var(--one-space) * 3)
-	}
-`;
 export default CharacterCard;

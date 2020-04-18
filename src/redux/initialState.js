@@ -74,10 +74,6 @@ export default {
 		loading: false,
 		error: null,
 		submitted: false,
-		options: {
-			races: [],
-			classes: [],
-		},
 		character: {
 			name: '',
 			race: null,

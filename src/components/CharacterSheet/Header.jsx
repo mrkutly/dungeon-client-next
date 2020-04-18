@@ -15,7 +15,7 @@ const Heading = ({ character, editMode, setEditMode }) => {
 
 	const save = () => {
 		const characterId = Router.query.id;
-		dispatch(updateStats({ characterId, updates: edits }));
+		dispatch(updateStats({ characterId, updates: edits }, new AbortController()));
 		setEditMode(false);
 	};
 

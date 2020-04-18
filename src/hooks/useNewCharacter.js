@@ -1,28 +1,12 @@
-import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setField, submitForm, loadOptions } from '../redux/actions/new';
+import { setField, submitForm } from '../redux/actions/new';
 
-const useNewCharacter = () => {
+const useNewCharacter = ({ races, classes }) => {
 	const dispatch = useDispatch();
-	const { races, classes } = useSelector((s) => s.new.options);
 	const submitted = useSelector((s) => s.new.submitted);
 	const loading = useSelector((s) => s.new.loading);
 	const error = useSelector((s) => s.new.error);
 	const formData = useSelector((s) => s.new.character);
-
-	useEffect(() => {
-		const controllerOne = new AbortController();
-		const	controllerTwo	= new AbortController();
-
-		if (!races.length || !classes.length) {
-			dispatch(loadOptions(controllerOne, controllerTwo));
-		}
-
-		return () => {
-			controllerOne.abort();
-			controllerTwo.abort();
-		};
-	}, []);
 
 	const numericFields = Object.keys(formData).filter((k) => typeof formData[k] === 'number');
 
@@ -63,8 +47,6 @@ const useNewCharacter = () => {
 		numericFields,
 		loading,
 		error,
-		races,
-		classes,
 	};
 };
 
