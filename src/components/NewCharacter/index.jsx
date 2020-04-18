@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import Link from 'next/link';
 import HomeLayout from '../layouts/HomeLayout';
+import Err from '../Err';
 import RaceSelect from './RaceSelect';
 import ClassSelect from './ClassSelect';
 import AttributesSelect from './AttributesSelect';
@@ -51,13 +52,9 @@ const NewCharacter = () => {
 						formData={formData}
 						handleChange={handleNumericChange}
 					/>
+					{error && <Err err={error} />}
 					<button type="submit">Create</button>
 				</FormStyles>
-			)}
-			{error && (
-				<h2 id="error">
-					{error}
-				</h2>
 			)}
 			<Link href="/">
 				<a>Go Back</a>
