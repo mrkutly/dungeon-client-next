@@ -8,10 +8,8 @@ import AttributesSelect from './AttributesSelect';
 import useNewCharacter from '../../hooks/useNewCharacter';
 import { FormStyles } from './styles';
 
-const NewCharacter = () => {
+const NewCharacter = ({ races, classes }) => {
 	const {
-		races,
-		classes,
 		error,
 		loading,
 		handleChange,
@@ -20,42 +18,41 @@ const NewCharacter = () => {
 		handleNumericChange,
 		formData,
 		numericFields,
-	} = useNewCharacter();
-
-	const dataLoaded = races.length > 0 && classes.length > 0;
+	} = useNewCharacter({ races, classes });
 
 	return (
 		<HomeLayout>
 			<h1>Create a new character</h1>
-			{loading && <h1>loading...</h1>}
-			{dataLoaded && (
-				<FormStyles method="POST" onSubmit={handleSubmit} aria-busy={submitted} disabled={submitted}>
-					<label htmlFor="name" className="large">
-						Name
-						<input
-							type="text"
-							name="name"
-							id="name"
-							vale={formData.name}
-							onChange={handleChange}
-							disabled={submitted}
+			{loading
+				? <h1>loading...</h1>
+				: (
+					<FormStyles method="POST" onSubmit={handleSubmit} aria-busy={submitted} disabled={submitted}>
+						<label htmlFor="name" className="large">
+							Name
+							<input
+								type="text"
+								name="name"
+								id="name"
+								vale={formData.name}
+								onChange={handleChange}
+								disabled={submitted}
+							/>
+						</label>
+						<RaceSelect races={races} handleChange={handleChange} selected={formData.race} />
+						<ClassSelect
+							classes={classes}
+							handleChange={handleChange}
+							selected={formData.characterClass}
 						/>
-					</label>
-					<RaceSelect races={races} handleChange={handleChange} selected={formData.race} />
-					<ClassSelect
-						classes={classes}
-						handleChange={handleChange}
-						selected={formData.characterClass}
-					/>
-					<AttributesSelect
-						attributes={numericFields}
-						formData={formData}
-						handleChange={handleNumericChange}
-					/>
-					{error && <Err err={error} />}
-					<button type="submit">Create</button>
-				</FormStyles>
-			)}
+						<AttributesSelect
+							attributes={numericFields}
+							formData={formData}
+							handleChange={handleNumericChange}
+						/>
+						{error && <Err err={error} />}
+						<button type="submit">Create</button>
+					</FormStyles>
+				)}
 			<Link href="/">
 				<a>Go Back</a>
 			</Link>
