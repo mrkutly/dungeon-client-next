@@ -18,8 +18,13 @@ const App = ({ Component, pageProps, store }) => (
 	</>
 );
 
-App.getInitialProps = async function getInitialProps({ Component, ctx }) {
-	const pageProps = Component.getInitialProps ? await Component.getInitialProps(ctx) : {};
+App.getStaticProps = async function getStaticProps({ Component, ctx }) {
+	const pageProps = Component.getStaticProps ? await Component.getStaticProps(ctx) : {};
+	return { pageProps };
+};
+
+App.getServerSideProps = async function getServerSideProps({ Component, ctx }) {
+	const pageProps = Component.getServerSideProps ? await Component.getServerSideProps(ctx) : {};
 	return { pageProps };
 };
 

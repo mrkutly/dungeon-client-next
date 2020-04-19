@@ -2,7 +2,7 @@ const ClassSelect = ({ classes, handleChange, selected }) => (
 	<fieldset id="classes-fieldset">
 		<legend>Class</legend>
 		<div className="radio-buttons">
-			{classes.map((c) => (
+			{classes?.map((c) => (
 				<div className="radio-container" key={c._id}>
 					<input
 						type="radio"
