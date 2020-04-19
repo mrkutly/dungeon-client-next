@@ -5,18 +5,7 @@ import { mobileBreakpoint } from '../styleConfig';
 import Header from './Header';
 import Stats from './Stats';
 import BasicInfo from './BasicInfo';
-import Section from './Section';
-import {
-	FEATURES,
-	PROFICIENCIES,
-	SKILLS,
-	SPELLS,
-	EQUIPMENT,
-	LANGUAGES,
-	CONDITIONS,
-	TRAITS,
-	FEATS,
-} from '../../redux/attributeTypes';
+import SectionsList from './SectionsList';
 
 const CharacterSheet = ({ character }) => {
 	const [editMode, setEditMode] = useState(false);
@@ -44,15 +33,7 @@ const CharacterSheet = ({ character }) => {
 						copper={character.copper}
 						editMode={editMode}
 					/>
-					<Section data={character.feats} type={FEATS} editMode={editMode} />
-					<Section data={character.features} type={FEATURES} editMode={editMode} />
-					<Section data={character.proficiencies} type={PROFICIENCIES} editMode={editMode} />
-					<Section data={character.skills} type={SKILLS} editMode={editMode} />
-					<Section data={character.traits} type={TRAITS} editMode={editMode} />
-					<Section data={character.spells} type={SPELLS} editMode={editMode} />
-					<Section data={character.equipment} type={EQUIPMENT} editMode={editMode} />
-					<Section data={character.languages} type={LANGUAGES} editMode={editMode} />
-					<Section data={character.conditions} type={CONDITIONS} editMode={editMode} />
+					<SectionsList character={character} editMode={editMode} />
 				</SheetStyles>
 			</Provider>
 		</>

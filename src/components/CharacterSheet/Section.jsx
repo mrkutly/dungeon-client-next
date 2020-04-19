@@ -4,6 +4,8 @@ import Search from './Search';
 import { mobileBreakpoint } from '../styleConfig';
 
 const Section = ({ type, data, editMode }) => {
+	if (data.length === 0 && !editMode) return null;
+
 	const title = type[0].toUpperCase() + type.slice(1);
 
 	return (
