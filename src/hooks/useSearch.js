@@ -8,6 +8,7 @@ import sanitize from '../lib/sanitize';
 const useSearch = (type, query) => {
 	const charId = Router.query.id;
 	const dispatch = useDispatch();
+	const fetched = useSelector((s) => s.search[type].fetched);
 	const error = useSelector((s) => s.search[type].error);
 	const loading = useSelector((s) => s.search[type].loading);
 	const unfiltered = useSelector((s) => s.search[type].data);
@@ -55,10 +56,12 @@ const useSearch = (type, query) => {
 	data = data.filter((attr) => !characterHasAttribute(attr));
 
 	useEffect(() => {
-		const controller = new AbortController();
-		dispatch(loadData(type, controller));
+		if (!fetched) {
+			const controller = new AbortController();
+			dispatch(loadData(type, controller));
 
-		return () => controller.abort();
+			return () => controller.abort();
+		}
 	}, []);
 
 	return { data, error, loading };

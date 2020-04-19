@@ -10,12 +10,17 @@ const Heading = ({ character, editMode, setEditMode }) => {
 	const { level } = character;
 	const race = character.race.name;
 	const characterClass = character.characterClass.name;
-	const { edits, levelUp, levelDown } = useEdit();
+	const {
+		edits, levelUp, levelDown, isEdited,
+	} = useEdit();
 	const dispatch = useDispatch();
 
 	const save = () => {
-		const characterId = Router.query.id;
-		dispatch(updateStats({ characterId, updates: edits }, new AbortController()));
+		if (isEdited) {
+			const characterId = Router.query.id;
+			dispatch(updateStats({ characterId, updates: edits }, new AbortController()));
+		}
+
 		setEditMode(false);
 	};
 

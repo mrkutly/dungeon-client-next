@@ -3,6 +3,7 @@ import { createContext, useContext, useState } from 'react';
 export const EditContext = createContext();
 
 export const Provider = ({ character, children }) => {
+	const [isEdited, setIsEdited] = useState(false);
 	const [edits, setEdits] = useState({
 		level: character.level,
 		dexterity: character.dexterity,
@@ -39,6 +40,7 @@ export const Provider = ({ character, children }) => {
 
 	const levelUp = () => {
 		if (edits.level === 20) return;
+		if (!isEdited) setIsEdited(true);
 		setEdits({
 			...edits,
 			level: edits.level + 1,
@@ -47,6 +49,7 @@ export const Provider = ({ character, children }) => {
 
 	const levelDown = () => {
 		if (edits.level === 1) return;
+		if (!isEdited) setIsEdited(true);
 		setEdits({
 			...edits,
 			level: edits.level - 1,
@@ -56,6 +59,7 @@ export const Provider = ({ character, children }) => {
 	const handleEdit = (e) => {
 		const isValid = validate(e.target);
 		if (!isValid) return;
+		if (!isEdited) setIsEdited(true);
 		setEdits({
 			...edits,
 			[e.target.name]: Number(e.target.value),
@@ -70,6 +74,7 @@ export const Provider = ({ character, children }) => {
 				handleEdit,
 				levelUp,
 				levelDown,
+				isEdited,
 			}
 		}
 		>{children}

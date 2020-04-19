@@ -21,6 +21,7 @@ export default function reducer(state = initialState.search, action) {
 					data: action.payload.data,
 					loading: false,
 					error: null,
+					fetched: true,
 				},
 			};
 
