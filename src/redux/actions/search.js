@@ -32,8 +32,11 @@ export const cacheResult = ({ type, query, result }) => ({
 	payload: { type, query, result },
 });
 
-export const loadData = (type, controller) => async (dispatch) => {
+export const loadData = (type, controller) => async (dispatch, getState) => {
 	try {
+		const state = getState();
+		if (state.search[type].data.length > 0) return;
+
 		dispatch(searchLoadStarted(type));
 
 		const result = await get(`/${type}`, null, controller);
