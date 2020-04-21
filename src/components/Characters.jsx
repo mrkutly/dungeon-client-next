@@ -4,35 +4,38 @@ import CharacterCard from './CharacterCard';
 
 const Characters = () => {
 	const { error, data } = useSelector((s) => s.characters);
+	const name = useSelector((s) => s.auth.user?.name);
 	const characters = Object.values(data);
 
 	if (error) return <h1>{error}</h1>;
 	if (!characters) return null;
 
 	return (
-		<div style={{ marginBottom: 'calc(2 * var(--one-space))' }}>
-			<CharacterListStyles>
+		<CharacterListStyles>
+			<h1 className="heading">{name}'s characters:</h1>
+			<ul>
 				{characters.map((c) => <li key={c._id}><CharacterCard character={c} /></li>)}
-			</CharacterListStyles>
-		</div>
+			</ul>
+		</CharacterListStyles>
 	);
 };
 
-const CharacterListStyles = styled.ul`
-	margin: 0 auto;
-	list-style: none;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: space-evenly;
-	padding-left: 0;
-	max-width: calc(var(--one-space) * 100);
-	min-height: calc(70vh - var(--one-space) - var(--one-space));
+const CharacterListStyles = styled.div`
+	margin-top: calc(var(--one-space) * 1);
+
+	h1.heading {
+		display: inline-block;
+		border-bottom: var(--one-width) solid var(--highlight);
+	}
+
+	ul {
+		margin: 0 auto;
+		list-style: none;
+		padding-left: 0;
+	}
 
 	li {
-		display: inline-block;
-		width: calc(var(--one-space) * 20);
-		margin: 0 calc(var(--one-space) * 2.5);
+		margin-bottom: calc(var(--one-space) * 5);
 	}
 `;
 

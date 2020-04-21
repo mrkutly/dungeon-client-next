@@ -6,6 +6,10 @@ import CharacterSheet from './CharacterSheet';
 const CharacterPage = () => {
 	const router = useRouter();
 	const { id } = router.query;
+	if (!id) {
+		router.push('/characters');
+		return null;
+	}
 	const { character, error, loading } = useCharacter(id);
 
 	return (

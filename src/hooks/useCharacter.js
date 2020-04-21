@@ -12,7 +12,7 @@ const useCharacter = (id) => {
 	const character = data?.[id];
 
 	useEffect(() => {
-		if (fetched && !character.detailsLoaded) {
+		if (fetched && !character?.detailsLoaded) {
 			dispatch(getCharacterDetails(character, token, controller));
 		}
 
