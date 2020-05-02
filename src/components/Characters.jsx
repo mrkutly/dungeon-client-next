@@ -12,7 +12,7 @@ const Characters = () => {
 
 	return (
 		<CharacterListStyles>
-			<h1 className="heading">{name}'s characters:</h1>
+			<h1 className="heading">{name}'s characters</h1>
 			<ul>
 				{characters.map((c) => <li key={c._id}><CharacterCard character={c} /></li>)}
 			</ul>
@@ -21,11 +21,12 @@ const Characters = () => {
 };
 
 const CharacterListStyles = styled.div`
-	margin-top: calc(var(--one-space) * 1);
+	margin-top: calc(var(--one-space) * 8);
 
 	h1.heading {
 		display: inline-block;
 		border-bottom: var(--one-width) solid var(--highlight);
+		margin-bottom: calc(var(--one-space) * 8);
 	}
 
 	ul {
@@ -35,7 +36,7 @@ const CharacterListStyles = styled.div`
 	}
 
 	li {
-		margin-bottom: calc(var(--one-space) * 5);
+		margin-bottom: calc(var(--one-space) * 8);
 	}
 `;
 

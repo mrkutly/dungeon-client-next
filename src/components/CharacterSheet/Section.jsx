@@ -30,7 +30,7 @@ const ListStyles = styled.ul`
 
 const SectionStyles = styled.section`
 	@media (${mobileBreakpoint}) {
-		margin: calc(var(--one-space) * 5) 0;
+		margin: calc(var(--one-space) * 10) 0;
 	}
 `;
 
