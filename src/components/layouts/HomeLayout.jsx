@@ -41,9 +41,11 @@ const HomeStyles = styled.main`
 
 	nav{
 		display: block;
+		
 		a {
-		margin-right: calc(var(--one-space) * 3);
-	}}
+			margin-right: calc(var(--one-space) * 3);
+		}
+	}
 `;
 
 export default HomeLayout;

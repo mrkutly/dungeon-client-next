@@ -59,7 +59,7 @@ export const characterDetailsLoadSuccess = (character) => ({
 
 
 export const getCharacterDetails = (character, token, controller) => async (dispatch) => {
-	if (character.detailsLoaded) return;
+	if (character?.detailsLoaded) return;
 	try {
 		dispatch(characterDetailsLoadStarted(character._id));
 		const response = await get(`/characters/${character._id}`, token, controller);

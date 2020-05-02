@@ -8,7 +8,7 @@ const CharacterCard = ({ character }) => {
 	const characterClass = character.characterClass.name;
 
 	return (
-		<Link href="/characters/[id]" as={`/characters/${_id}`}>
+		<Link href={`/characters/[name]?id=${_id}`} as={`/characters/${name.toLowerCase()}`}>
 			<a>
 				<h2>
 					{name}

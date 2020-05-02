@@ -74,6 +74,8 @@ const HeadingStyles = styled.header`
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: baseline;
+	margin-top: calc(var(--one-space) * 8);
+	margin-bottom: calc(var(--one-space) * 4);
 
 	button.level-btn {
 		border: none;
